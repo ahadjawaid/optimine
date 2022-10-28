@@ -4,12 +4,12 @@ const passport = require('passport');
 const bodyParser = require("body-parser");
 const connect = require("./utilities/connect")
 const keys = require('./config');
-// require('./models/User');
-// require('./controller/passport');
+require('./models/User');
+require('./controller/passport');
 
 
-const port = 4000;
-const mongoURI = "";
+const port = keys.port;
+const mongoURI = keys.mongoURI;
 
 const app = express();
 
@@ -23,11 +23,11 @@ app.use(
     })
 );
 
-// app.use(passport.initialize());
-// // app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
 
-// connect(mongoURI);
-// require('./routes/authRoutes')(app);
+connect(mongoURI);
+require('./routes/authRoutes')(app);
 
 app.listen(port, () => {
     console.log(`Running on port ${port}`)
