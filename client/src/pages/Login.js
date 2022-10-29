@@ -73,7 +73,7 @@ class Login extends React.Component {
               name="password" 
               auto-complete="current-password"
             />
-            <Button type="sumbit" variant="contained" fullWidth>Sign In</Button>
+            <Button type="sumbit" variant="contained" color="accent" fullWidth>Sign In</Button>
           </Box>
         </Box>
       </DenyAccess>
