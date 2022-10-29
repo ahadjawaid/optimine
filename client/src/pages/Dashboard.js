@@ -1,14 +1,19 @@
 import React from "react";
 import Typography from '@mui/material/Typography';
+import DenyAccess from "../components/DenyAccess"
+
+// Components
+import Navbar from "../components/Navbar";
 
 class Dashboard extends React.Component {
-    render() {
-        return (
-            <div>
-                <Typography variant="h1">Dashboard</Typography>
-            </div>
-        );
-    }
+  render() {
+    return (
+      <DenyAccess when="loggedout">
+        <Navbar />
+        <Typography variant="h1">Dashboard</Typography>
+      </DenyAccess>
+    );
+  }
 }
 
 export default Dashboard;

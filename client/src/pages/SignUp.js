@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 import { Box, Button, TextField } from "@mui/material";
 import DenyAccess from "../components/DenyAccess";
 
-class Login extends React.Component {
+class SignUp extends React.Component {
   constructor(props) {
     super(props);
     this.state = { alertMessage: "" };
@@ -20,9 +20,10 @@ class Login extends React.Component {
 
     const data = new FormData(event.currentTarget);
 
-    Userfront.login({
+    Userfront.signup({
       method: "password",
       email: data.get("email"),
+      name: data.get("name"),
       password: data.get("password"),
       redirect: "/dashboard",
     }).catch((error) => {
@@ -46,13 +47,23 @@ class Login extends React.Component {
             alignItems: 'center',
           }}
         >
-          <Typography component="h1" variant="h4">Sign In</Typography>
+          <Typography component="h1" variant="h4">Create Account</Typography>
 
           {this.state.alertMessage !== "" && (
             <Typography>{this.state.alertMessage}</Typography>
           )}
 
           <Box component="form" onSubmit={this.submit} noValidate>
+            <TextField 
+              margin="normal" 
+              variant="standard" 
+              required 
+              fullWidth 
+              label="Name" 
+              auto-complete="name" 
+              name="name" 
+              autoFocus
+            />
             <TextField 
               margin="normal" 
               variant="standard" 
@@ -73,7 +84,7 @@ class Login extends React.Component {
               name="password" 
               auto-complete="current-password"
             />
-            <Button type="sumbit" variant="contained" fullWidth>Sign In</Button>
+            <Button type="sumbit" variant="contained" fullWidth>Sign Up</Button>
           </Box>
         </Box>
       </DenyAccess>
@@ -81,4 +92,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default SignUp;
