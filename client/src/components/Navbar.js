@@ -1,5 +1,5 @@
 import React from "react";
-import { AppBar, Box, Button, ButtonBase, Divider, IconButton, ListItemIcon, Menu, MenuItem, Toolbar, Tooltip, Typography } from "@mui/material";
+import { AppBar, Box, Button, ButtonBase, Divider, IconButton, ListItemIcon, Menu, MenuItem, Stack, Toolbar, Tooltip, Typography } from "@mui/material";
 import Userfront from "@userfront/core";
 import UserAvatar from "./UserAvatar";
 import AccountCircle from "@mui/icons-material/AccountCircle"
@@ -9,14 +9,16 @@ import Logout from "@mui/icons-material/Logout";
 const defaultPages = ["Product", "Pricing"];
 const userPages = ["Explore", "Queries"];
 
-const navButtonStyle = { 
-  padding: 2, 
-  margin: 1, 
-  height: 36, 
+const navButtonStyle = {
+  padding: 2,
+  height: 36,
   borderRadius: 18,
   fontSize: "1rem",
   textTransform: "none",
 }
+const defaultPageButtonStyle = { 
+  display: { xs: "none", sm: "flex" }
+};
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -44,6 +46,7 @@ class Navbar extends React.Component {
   render() {
     let loggedIn = (Userfront.tokens.accessToken != null);
     let pages = loggedIn ? userPages : defaultPages
+    let pageButtonStyle = loggedIn ? {} : defaultPageButtonStyle
 
     return <AppBar position="static" color="background" sx={{ padding: 0.5 }}>
       <Toolbar>
@@ -56,43 +59,52 @@ class Navbar extends React.Component {
 
         <Box component="div" sx={{ flexGrow: 1 }}></Box>
 
-        {pages.map((page) =>
-          <Button href={"/" + page.toLowerCase()} sx={navButtonStyle} variant="text" color="inherit">{page}</Button>
-        )}
-
-        {loggedIn && (
-          <div>
-            <Tooltip title="Account settings">
-              <IconButton onClick={this.openUserMenu} sx={{ marginLeft: 2 }}>
-                <UserAvatar name={Userfront.user.name ?? ""} />
-              </IconButton>
-            </Tooltip>
-
-            <Menu
-              anchorEl={this.state.toggleUserMenu}
-              open={Boolean(this.state.toggleUserMenu)}
-              onClose={this.closeUserMenu}
+        <Stack direction="row" alignItems="center" spacing={1.2} component="div">
+          {pages.map((page) =>
+            <Button 
+              href={"/" + page.toLowerCase()} 
+              sx={{...navButtonStyle, ...pageButtonStyle}} 
+              variant="text" 
+              color="inherit"
             >
-              <MenuItem component="a" href="/profile">
-                <ListItemIcon><AccountCircle /></ListItemIcon> Profile
-              </MenuItem>
-              <Divider />
-              <MenuItem component="a" href="/settings">
-                <ListItemIcon><Settings /></ListItemIcon> Settings
-              </MenuItem>
-              <MenuItem onClick={this.signOut}>
-                <ListItemIcon><Logout /></ListItemIcon> Sign Out
-              </MenuItem>
-            </Menu>
-          </div>
-        )}
+                {page}
+            </Button>
+          )}
 
-        {!loggedIn && (
-          <div>
+          {loggedIn && (
+            <div>
+              <Tooltip title="Account settings">
+                <IconButton onClick={this.openUserMenu}>
+                  <UserAvatar name={Userfront.user.name ?? ""} />
+                </IconButton>
+              </Tooltip>
+
+              <Menu
+                anchorEl={this.state.toggleUserMenu}
+                open={Boolean(this.state.toggleUserMenu)}
+                onClose={this.closeUserMenu}
+              >
+                <MenuItem component="a" href="/profile">
+                  <ListItemIcon><AccountCircle /></ListItemIcon> Profile
+                </MenuItem>
+                <Divider />
+                <MenuItem component="a" href="/settings">
+                  <ListItemIcon><Settings /></ListItemIcon> Settings
+                </MenuItem>
+                <MenuItem onClick={this.signOut}>
+                  <ListItemIcon><Logout /></ListItemIcon> Sign Out
+                </MenuItem>
+              </Menu>
+            </div>
+          )}
+
+          {!loggedIn &&
             <Button href="/login" sx={navButtonStyle} variant="contained" color="secondary">Sign In</Button>
+          }
+          {!loggedIn &&
             <Button href="/signup" sx={navButtonStyle} variant="contained" color="primary">Sign Up</Button>
-          </div>
-        )}
+          }
+        </Stack>
       </Toolbar>
     </AppBar>;
   }

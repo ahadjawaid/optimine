@@ -16,7 +16,7 @@ class SignUp extends React.Component {
 
   signUp(event) {
     event.preventDefault();
-    this.setAlertMessage();
+    this.setAlertMessage("");
 
     const data = new FormData(event.currentTarget);
 
@@ -37,31 +37,43 @@ class SignUp extends React.Component {
 
   render() {
     return (
-      <DenyAccess when="loggedin">
+      <DenyAccess when="loggedin" redirect="/dashboard">
         <Grid container component="main" sx={{
           height: "100vh",
           background: "linear-gradient(180deg, rgba(35, 104, 162, 0.2) 0%, rgba(99, 162, 216, 0.2) 69.27%, rgba(170, 212, 245, 0.2) 100%);",
         }}>
-          <Grid item xs={false} sm={4} md={5.5}>
+          <Grid item xs={false} sm={4} md={5.5} sx={{ display: { xs: "none", sm: "block"}}}>
             <ButtonBase component="a" href="/" disableRipple>
               <Stack direction="row" alignItems="center" sx={{ margin: 3 }}>
-                <img src="../assets/logo_black.png" alt="logo" height="82px" />
-                <Typography href="/" sx={{ marginLeft: 2.5, fontWeight: "bold" }} variant="h4" component="h2">
+                <Box component="img" src="../assets/logo_black.png" alt="logo" height={{ sm: "48px", md: "82px" }} />
+                <Typography href="/" variant="h4" component="h2" sx={{ 
+                  marginLeft: 2.5, 
+                  fontWeight: "bold", 
+                  fontSize: { sm: "1.6rem", md: "2.125rem" } 
+                }}>
                   Optimine
                 </Typography>
               </Stack>
             </ButtonBase>
 
-            {/* <Stack zIndex="3" sx={{ mt: 3, ml: 12, mr: -4 }}>
-              <img src="../assets/data_analysis.png" alt="" width="100%" zIndex="3" />
-            </Stack> */}
+            <Stack alignItems="end" sx={{ mt: { sm: 12, md: 4 }, ml: "12%", mr: "-6%" }}>
+              <Box 
+                component="img" 
+                src="../assets/data_analysis.png" 
+                alt="" 
+                minWidth="52vh" 
+                width="100%" 
+                maxWidth="80vh" 
+                zIndex="1" 
+              />
+            </Stack>
           </Grid>
 
           <Grid item xs={12} sm={8} md={6.5}>
             <Paper component="form" onSubmit={this.signUp} sx={{
-              borderRadius: 10,
-              borderTopRightRadius: 0,
-              borderBottomRightRadius: 0,
+              borderRadius: 0,
+              borderTopLeftRadius: { xs: 0, sm: 48 },
+              borderBottomLeftRadius: { xs: 0, sm: 48 },
               height: "100vh"
             }}>
               <Box sx={{ padding: "12%" }}>

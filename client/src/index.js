@@ -6,8 +6,9 @@ import Userfront from "@userfront/core";
 import reducers from "./store/reducers";
 import App from "./App";
 
-// initialize authentication service
-Userfront.init("6bgrqm9n");
+// setup authentication service
+const keys = require("./config");
+Userfront.init(keys.userfrontAuthID);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const store = configureStore({
