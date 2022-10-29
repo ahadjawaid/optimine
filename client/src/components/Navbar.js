@@ -9,6 +9,15 @@ import Logout from "@mui/icons-material/Logout";
 const defaultPages = ["Product", "Pricing"];
 const userPages = ["Explore", "Queries"];
 
+const navButtonStyle = { 
+  padding: 2, 
+  margin: 1, 
+  height: 36, 
+  borderRadius: 18,
+  fontSize: "1rem",
+  textTransform: "none",
+}
+
 class Navbar extends React.Component {
   constructor(props) {
     super(props);
@@ -36,23 +45,25 @@ class Navbar extends React.Component {
     let loggedIn = (Userfront.tokens.accessToken != null);
     let pages = loggedIn ? userPages : defaultPages
 
-    return <AppBar position="static">
+    return <AppBar position="static" color="background" sx={{ padding: 0.5 }}>
       <Toolbar>
-        <ButtonBase component="a" href={loggedIn ? "/dashboard" : "/"}>
-          <img src="../assets/logo_white.png" alt="logo" height="50px" />
-          <Typography href="/" variant="h5" component="h2">Optimine</Typography>
+        <ButtonBase component="a" href={loggedIn ? "/dashboard" : "/"} disableRipple>
+          <img src="../assets/logo_black.png" alt="logo" height="48px" />
+          <Typography href="/" sx={{ marginLeft: 2.5, fontWeight: "bold" }} variant="h5" component="h2">
+            Optimine
+          </Typography>
         </ButtonBase>
 
         <Box component="div" sx={{ flexGrow: 1 }}></Box>
 
         {pages.map((page) =>
-          <Button href={"/" + page} variant="text" color="inherit">{page}</Button>
+          <Button href={"/" + page.toLowerCase()} sx={navButtonStyle} variant="text" color="inherit">{page}</Button>
         )}
 
         {loggedIn && (
           <div>
             <Tooltip title="Account settings">
-              <IconButton onClick={this.openUserMenu}>
+              <IconButton onClick={this.openUserMenu} sx={{ marginLeft: 2 }}>
                 <UserAvatar name={Userfront.user.name ?? ""} />
               </IconButton>
             </Tooltip>
@@ -78,8 +89,8 @@ class Navbar extends React.Component {
 
         {!loggedIn && (
           <div>
-            <Button href="/login" variant="contained">Sign In</Button>
-            <Button href="/signup" variant="contained">Sign Up</Button>
+            <Button href="/login" sx={navButtonStyle} variant="contained" color="secondary">Sign In</Button>
+            <Button href="/signup" sx={navButtonStyle} variant="contained" color="primary">Sign Up</Button>
           </div>
         )}
       </Toolbar>

@@ -12,20 +12,47 @@ import Setting from "./pages/Setting";
 
 // Redux
 import { fetchUser } from './store/actions';
+import { createTheme, ThemeProvider } from "@mui/material";
+
+// Theming
+import "./style/App.css"
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#63A2D8",
+      contrastText: "#FFFFFF",
+    },
+    secondary: {
+      main: "#A0C3E1",
+      contrastText: "#FFFFFF",
+    },
+    accent: {
+      main: "#6C63FF",
+      contrastText: "#FFFFFF",
+    },
+    background: {
+      paper: "#ffffff",
+      default: "#ffffff",
+    },
+  },
+});
 
 class App extends React.Component {
   render() {
     return (
-      <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/search" element={<Search />} />
-        <Route path="/settings" element={<Setting />} />
-      </Routes>
-    </BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Landing />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/settings" element={<Setting />} />
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
     );
   }
 }

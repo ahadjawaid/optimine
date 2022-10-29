@@ -6,7 +6,7 @@ import Userfront from "@userfront/core";
 import reducers from "./store/reducers";
 import App from "./App";
 
-// initialize user-authentication service
+// initialize authentication service
 Userfront.init("6bgrqm9n");
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

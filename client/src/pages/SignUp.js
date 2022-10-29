@@ -10,11 +10,11 @@ class SignUp extends React.Component {
     super(props);
     this.state = { alertMessage: "" };
 
-    this.submit = this.submit.bind(this);
+    this.signUp = this.signUp.bind(this);
     this.setAlertMessage = this.setAlertMessage.bind(this);
   }
 
-  submit(event) {
+  signUp(event) {
     event.preventDefault();
     this.setAlertMessage();
 
@@ -53,7 +53,7 @@ class SignUp extends React.Component {
             <Typography>{this.state.alertMessage}</Typography>
           )}
 
-          <Box component="form" onSubmit={this.submit} noValidate>
+          <Box component="form" onSubmit={this.signUp} noValidate>
             <TextField 
               margin="normal" 
               variant="standard" 

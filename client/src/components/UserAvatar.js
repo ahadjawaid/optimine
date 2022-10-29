@@ -26,8 +26,8 @@ class UserAvatar extends React.Component {
   render() {
     return (
       <Avatar
-        sx={{ bgcolor: this.getColor() }}
-        children={this.getInitials()} />
+        children={this.getInitials()}
+        sx={{ bgcolor: this.getColor(), fontSize: "1rem", height: "36px", width: "36px" }} />
     )
   }
 }
