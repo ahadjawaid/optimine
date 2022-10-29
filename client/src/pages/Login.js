@@ -2,19 +2,20 @@ import React from "react";
 import Typography from '@mui/material/Typography';
 import Userfront from "@userfront/core";
 import Navbar from "../components/Navbar";
-import { Box, Button, TextField } from "@mui/material";
+import { Alert, Button, Link, Paper, Stack } from "@mui/material";
 import DenyAccess from "../components/DenyAccess";
+import AuthField from "../components/AuthField";
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = { alertMessage: "" };
 
-    this.submit = this.submit.bind(this);
+    this.signIn = this.signIn.bind(this);
     this.setAlertMessage = this.setAlertMessage.bind(this);
   }
 
-  submit(event) {
+  signIn(event) {
     event.preventDefault();
     this.setAlertMessage();
 
@@ -38,44 +39,26 @@ class Login extends React.Component {
     return (
       <DenyAccess when="loggedin">
         <Navbar />
-        <Box 
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Typography component="h1" variant="h4">Sign In</Typography>
 
-          {this.state.alertMessage !== "" && (
-            <Typography>{this.state.alertMessage}</Typography>
-          )}
+        <Stack direction="column" alignItems="center" sx={{ margin: 10 }}>
+          <Paper component="form" onSubmit={this.signIn} sx={{ padding: 4, maxWidth: 480 }}>
+            <Typography component="h1" variant="h4" sx={{ fontWeight: "bold" }}>Sign In</Typography>
 
-          <Box component="form" onSubmit={this.submit} noValidate>
-            <TextField 
-              margin="normal" 
-              variant="standard" 
-              required 
-              fullWidth 
-              label="Email" 
-              auto-complete="email" 
-              name="email" 
-              autoFocus
-            />
-            <TextField 
-              margin="normal" 
-              variant="standard" 
-              required 
-              fullWidth 
-              label="Password" 
-              type="password" 
-              name="password" 
-              auto-complete="current-password"
-            />
-            <Button type="sumbit" variant="contained" color="accent" fullWidth>Sign In</Button>
-          </Box>
-        </Box>
+            {this.state.alertMessage !== "" &&
+              <Alert severity="error" sx={{ mt: 2 }}>{this.state.alertMessage}</Alert>
+            }
+
+            <AuthField type="email" name="Email" autoComplete="email" autoFocus sx={{ mt: 4 }} />
+            <AuthField type="password" name="Password" autoComplete="password" />
+            <Button type="sumbit" color="accent" variant="contained" fullWidth sx={{ my: 3 }}>Sign In</Button>
+
+            <Stack direction="row">
+              <Typography>
+                Don't have an account? <Link href="/signup" sx={{ textDecoration: "none" }}>Create Account</Link>
+              </Typography>
+            </Stack>
+          </Paper>
+        </Stack>
       </DenyAccess>
     );
   }
