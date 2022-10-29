@@ -5,7 +5,7 @@ import Userfront from "@userfront/core";
 class DenyAccess extends React.Component {
   render() {
     let deny = (this.props.when === "loggedin");
-    let target = deny ? "/dashboard" : "/login";
+    let target = this.props.redirect;
 
     if (Boolean(Userfront.tokens.accessToken) === deny) {
       return <Navigate to={target} replace />;

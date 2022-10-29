@@ -16,27 +16,7 @@ import { createTheme, ThemeProvider } from "@mui/material";
 
 // Theming
 import "./style/App.css"
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#63A2D8",
-      contrastText: "#FFFFFF",
-    },
-    secondary: {
-      main: "#A0C3E1",
-      contrastText: "#FFFFFF",
-    },
-    accent: {
-      main: "#6C63FF",
-      contrastText: "#FFFFFF",
-    },
-    background: {
-      paper: "#ffffff",
-      default: "#ffffff",
-    },
-  },
-});
+const theme = require("./style/theme.js");
 
 class App extends React.Component {
   render() {

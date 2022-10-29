@@ -17,7 +17,7 @@ class Login extends React.Component {
 
   signIn(event) {
     event.preventDefault();
-    this.setAlertMessage();
+    this.setAlertMessage("");
 
     const data = new FormData(event.currentTarget);
 
@@ -37,10 +37,10 @@ class Login extends React.Component {
 
   render() {
     return (
-      <DenyAccess when="loggedin">
+      <DenyAccess when="loggedin" redirect="/dashboard">
         <Navbar />
 
-        <Stack direction="column" alignItems="center" sx={{ margin: 10 }}>
+        <Stack direction="column" alignItems="center" sx={{ margin: { xs: 5, sm: 10 }, mb: 0 }}>
           <Paper component="form" onSubmit={this.signIn} sx={{ padding: 4, maxWidth: 480 }}>
             <Typography component="h1" variant="h4" sx={{ fontWeight: "bold" }}>Sign In</Typography>
 
@@ -54,7 +54,7 @@ class Login extends React.Component {
 
             <Stack direction="row">
               <Typography>
-                Don't have an account? <Link href="/signup" sx={{ textDecoration: "none" }}>Create Account</Link>
+                Don't have an account? <Link href="/signup" sx={{ textDecoration: "none" }}>Sign Up</Link>
               </Typography>
             </Stack>
           </Paper>

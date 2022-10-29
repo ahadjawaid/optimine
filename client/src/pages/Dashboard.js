@@ -8,7 +8,7 @@ import Navbar from "../components/Navbar";
 class Dashboard extends React.Component {
   render() {
     return (
-      <DenyAccess when="loggedout">
+      <DenyAccess when="loggedout" redirect="/login">
         <Navbar />
         <Typography variant="h1">Dashboard</Typography>
       </DenyAccess>
