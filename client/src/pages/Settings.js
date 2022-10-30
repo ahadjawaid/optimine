@@ -1,16 +1,17 @@
 import React from "react";
 import Typography from '@mui/material/Typography';
 import Navbar from "../components/Navbar";
+import DenyAccess from "../components/DenyAccess";
 
-class Setting extends React.Component {
+class Settings extends React.Component {
   render() {
     return (
-      <div>
+      <DenyAccess when="loggedout" redirect="/login">
         <Navbar />
         <Typography variant="h1">Settings</Typography>
-      </div>
+      </DenyAccess>
     );
   }
 }
 
-export default Setting;
+export default Settings;

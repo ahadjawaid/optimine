@@ -8,15 +8,15 @@ import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Search from "./pages/Search";
-import Setting from "./pages/Setting";
+import Settings from "./pages/Settings";
 
 // Redux
 import { fetchUser } from './store/actions';
-import { createTheme, ThemeProvider } from "@mui/material";
+import { ThemeProvider } from "@mui/material";
 
 // Theming
-import "./style/App.css"
-const theme = require("./style/theme.js");
+import "./data/App.css";
+const theme = require("./data/theme.js");
 
 class App extends React.Component {
   render() {
@@ -29,7 +29,7 @@ class App extends React.Component {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/search" element={<Search />} />
-            <Route path="/settings" element={<Setting />} />
+            <Route path="/settings" element={<Settings />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
