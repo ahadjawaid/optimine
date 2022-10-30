@@ -8,7 +8,7 @@ class AuthField extends React.Component {
       variant="standard"
       label={this.props.name}
       name={this.props.name.toLowerCase()}
-      auto-complete={this.props.autoComplete}
+      autoComplete={this.props.autoComplete}
       type={this.props.type}
       required
       fullWidth

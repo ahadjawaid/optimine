@@ -1,15 +1,13 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import Userfront from "@userfront/core";
+import AuthService from "../services/AuthService";
 
 class DenyAccess extends React.Component {
   render() {
     let deny = (this.props.when === "loggedin");
-    let target = this.props.redirect;
 
-    if (Boolean(Userfront.tokens.accessToken) === deny) {
-      return <Navigate to={target} replace />;
-    }
+    if (AuthService.authenticated === deny)
+      return <Navigate to={this.props.redirect} replace />;
 
     return this.props.children;
   }

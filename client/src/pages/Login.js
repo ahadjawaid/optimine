@@ -1,37 +1,32 @@
 import React from "react";
-import Typography from '@mui/material/Typography';
-import Userfront from "@userfront/core";
+import { Alert, Button, Link, Paper, Stack, Typography } from "@mui/material";
 import Navbar from "../components/Navbar";
-import { Alert, Button, Link, Paper, Stack } from "@mui/material";
 import DenyAccess from "../components/DenyAccess";
 import AuthField from "../components/AuthField";
+import AuthService from "../services/AuthService";
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = { alertMessage: "" };
-
-    this.signIn = this.signIn.bind(this);
-    this.setAlertMessage = this.setAlertMessage.bind(this);
+    
+    this.login = this.login.bind(this);
+    this.setErrorMessage = this.setErrorMessage.bind(this);
   }
 
-  signIn(event) {
+  login(event) {
     event.preventDefault();
-    this.setAlertMessage("");
-
+    this.setErrorMessage("");
     const data = new FormData(event.currentTarget);
 
-    Userfront.login({
-      method: "password",
-      email: data.get("email"),
-      password: data.get("password"),
-      redirect: "/dashboard",
-    }).catch((error) => {
-      this.setAlertMessage(error.message);
-    });
+    AuthService.loginWithEmail(
+      data.get("email"), 
+      data.get("password"), 
+      this.setErrorMessage
+    );
   }
 
-  setAlertMessage(message) {
+  setErrorMessage(message) {
     this.setState({ alertMessage: message });
   }
 
@@ -41,7 +36,7 @@ class Login extends React.Component {
         <Navbar />
 
         <Stack direction="column" alignItems="center" sx={{ margin: { xs: 5, sm: 10 }, mb: 0 }}>
-          <Paper component="form" onSubmit={this.signIn} sx={{ padding: 4, maxWidth: 480 }}>
+          <Paper component="form" onSubmit={this.login} sx={{ padding: 4, maxWidth: 480 }}>
             <Typography component="h1" variant="h4" sx={{ fontWeight: "bold" }}>Sign In</Typography>
 
             {this.state.alertMessage !== "" &&
@@ -51,12 +46,7 @@ class Login extends React.Component {
             <AuthField type="email" name="Email" autoComplete="email" autoFocus sx={{ mt: 4 }} />
             <AuthField type="password" name="Password" autoComplete="password" />
             <Button type="sumbit" color="accent" variant="contained" fullWidth sx={{ my: 3 }}>Sign In</Button>
-
-            <Stack direction="row">
-              <Typography>
-                Don't have an account? <Link href="/signup" sx={{ textDecoration: "none" }}>Sign Up</Link>
-              </Typography>
-            </Stack>
+            <Typography>Don't have an account? <Link href="/signup" sx={{ textDecoration: "none" }}>Sign Up</Link></Typography>
           </Paper>
         </Stack>
       </DenyAccess>

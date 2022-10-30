@@ -1,10 +1,11 @@
 import React from "react";
-import { AppBar, Box, Button, ButtonBase, Divider, IconButton, ListItemIcon, Menu, MenuItem, Stack, Toolbar, Tooltip, Typography } from "@mui/material";
-import Userfront from "@userfront/core";
-import UserAvatar from "./UserAvatar";
+import { AppBar, Box, Button, ButtonBase, Divider, IconButton, ListItemIcon, Menu, MenuItem, Stack, Toolbar, Tooltip } from "@mui/material";
 import AccountCircle from "@mui/icons-material/AccountCircle"
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
+import UserAvatar from "./UserAvatar";
+import AuthService from "../services/AuthService";
+import Logo from "./Logo";
 
 const defaultPages = ["Product", "Pricing"];
 const userPages = ["Explore", "Queries"];
@@ -24,7 +25,6 @@ class Navbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = { toggleUserMenu: false };
-
     this.openUserMenu = this.openUserMenu.bind(this);
     this.closeUserMenu = this.closeUserMenu.bind(this);
     this.signOut = this.signOut.bind(this);
@@ -40,50 +40,36 @@ class Navbar extends React.Component {
 
   signOut() {
     this.closeUserMenu();
-    Userfront.logout();
+    AuthService.logout();
   }
 
   render() {
-    let loggedIn = (Userfront.tokens.accessToken != null);
-    let pages = loggedIn ? userPages : defaultPages
-    let pageButtonStyle = loggedIn ? {} : defaultPageButtonStyle
+    let pages = AuthService.authenticated ? userPages : defaultPages
+    let pageButtonStyle = AuthService.authenticated ? {} : {...navButtonStyle, ...defaultPageButtonStyle}
+    let userMenuOpen = Boolean(this.state.toggleUserMenu);
 
     return <AppBar position="static" color="background" sx={{ padding: 0.5 }}>
       <Toolbar>
-        <ButtonBase component="a" href={loggedIn ? "/dashboard" : "/"} disableRipple>
-          <img src="../assets/logo_black.png" alt="logo" height="48px" />
-          <Typography href="/" sx={{ marginLeft: 2.5, fontWeight: "bold" }} variant="h5" component="h2">
-            Optimine
-          </Typography>
+        <ButtonBase component="a" href={AuthService.authenticated ? "/dashboard" : "/"} disableRipple>
+          <Logo />
         </ButtonBase>
 
-        <Box component="div" sx={{ flexGrow: 1 }}></Box>
+        <Box component="div" sx={{ flexGrow: 1 }} />
 
         <Stack direction="row" alignItems="center" spacing={1.2} component="div">
           {pages.map((page) =>
-            <Button 
-              href={"/" + page.toLowerCase()} 
-              sx={{...navButtonStyle, ...pageButtonStyle}} 
-              variant="text" 
-              color="inherit"
-            >
-                {page}
-            </Button>
+            <Button href={"/" + page.toLowerCase()} sx={pageButtonStyle} variant="text" color="inherit">{page}</Button>
           )}
 
-          {loggedIn && (
+          {AuthService.authenticated && 
             <div>
               <Tooltip title="Account settings">
                 <IconButton onClick={this.openUserMenu}>
-                  <UserAvatar name={Userfront.user.name ?? ""} />
+                  <UserAvatar name={AuthService.user.name ?? ""} />
                 </IconButton>
               </Tooltip>
 
-              <Menu
-                anchorEl={this.state.toggleUserMenu}
-                open={Boolean(this.state.toggleUserMenu)}
-                onClose={this.closeUserMenu}
-              >
+              <Menu anchorEl={this.state.toggleUserMenu} open={userMenuOpen} onClose={this.closeUserMenu}>
                 <MenuItem component="a" href="/profile">
                   <ListItemIcon><AccountCircle /></ListItemIcon> Profile
                 </MenuItem>
@@ -96,12 +82,12 @@ class Navbar extends React.Component {
                 </MenuItem>
               </Menu>
             </div>
-          )}
+          }
 
-          {!loggedIn &&
+          {!AuthService.authenticated && 
             <Button href="/login" sx={navButtonStyle} variant="contained" color="secondary">Sign In</Button>
           }
-          {!loggedIn &&
+          {!AuthService.authenticated && 
             <Button href="/signup" sx={navButtonStyle} variant="contained" color="primary">Sign Up</Button>
           }
         </Stack>
