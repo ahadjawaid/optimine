@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
+  id: {
+    type: String,
+    unique: true,
+  },
   uuid: {
     type: String,
     unique: true,
@@ -14,6 +18,5 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
-const UserModel = mongoose.model("user", UserSchema)
-
-exports.UserModel = UserModel;
+const User = mongoose.model("user", UserSchema)
+exports.User = User;
