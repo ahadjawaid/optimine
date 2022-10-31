@@ -3,14 +3,16 @@ import AuthService from "./AuthService";
 const keys = require("../data/config");
 
 class UserService {
-  static loadUser() {
-    // TODO: handle response from server and store
-    fetch(`${keys.apiURL}/user`, {
+  static async getUser() {
+    const response = await fetch(`${keys.apiURL}/user`, {
       method: "POST",
       headers: {
-        Authorization: `${AuthService.accessToken}`,
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${AuthService.accessToken}`,
       },
     });
+
+    return response.json();
   }
 }
 

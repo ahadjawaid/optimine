@@ -27,7 +27,7 @@ class Navbar extends React.Component {
     this.state = { toggleUserMenu: false };
     this.openUserMenu = this.openUserMenu.bind(this);
     this.closeUserMenu = this.closeUserMenu.bind(this);
-    this.signOut = this.signOut.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   openUserMenu(event) {
@@ -38,7 +38,7 @@ class Navbar extends React.Component {
     this.setState({ toggleUserMenu: false });
   }
 
-  signOut() {
+  logout() {
     this.closeUserMenu();
     AuthService.logout();
   }
@@ -77,7 +77,7 @@ class Navbar extends React.Component {
                 <MenuItem component="a" href="/settings">
                   <ListItemIcon><Settings /></ListItemIcon> Settings
                 </MenuItem>
-                <MenuItem onClick={this.signOut}>
+                <MenuItem onClick={this.logout}>
                   <ListItemIcon><Logout /></ListItemIcon> Sign Out
                 </MenuItem>
               </Menu>

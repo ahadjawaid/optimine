@@ -9,7 +9,7 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = { alertMessage: "" };
-    
+
     this.login = this.login.bind(this);
     this.setErrorMessage = this.setErrorMessage.bind(this);
   }
@@ -20,8 +20,8 @@ class Login extends React.Component {
     const data = new FormData(event.currentTarget);
 
     AuthService.loginWithEmail(
-      data.get("email"), 
-      data.get("password"), 
+      data.get("email"),
+      data.get("password"),
       this.setErrorMessage
     );
   }

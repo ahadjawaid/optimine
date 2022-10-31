@@ -26,7 +26,7 @@ class AuthService {
       redirect: "/dashboard",
     }).catch((error) => {
       setErrorMessage(error.message);
-    }).then(UserService.loadUser);
+    });
   }
 
   static loginWithEmail(email, password, setErrorMessage) {
@@ -37,7 +37,7 @@ class AuthService {
       redirect: "/dashboard",
     }).catch((error) => {
       setErrorMessage(error.message);
-    }).then(UserService.loadUser);
+    });
   }
 
   static logout() {
