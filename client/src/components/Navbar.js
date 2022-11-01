@@ -57,8 +57,8 @@ class Navbar extends React.Component {
         <Box component="div" sx={{ flexGrow: 1 }} />
 
         <Stack direction="row" alignItems="center" spacing={1.2} component="div">
-          {pages.map((page) =>
-            <Button href={"/" + page.toLowerCase()} sx={pageButtonStyle} variant="text" color="inherit">{page}</Button>
+          {pages.map((page, key) =>
+            <Button key={key} href={"/" + page.toLowerCase()} sx={pageButtonStyle} variant="text" color="inherit">{page}</Button>
           )}
 
           {AuthService.authenticated && 
