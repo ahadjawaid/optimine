@@ -16,6 +16,9 @@ class UserAvatar extends React.Component {
 
   getInitials() {
     let names = this.props.name.split(" ");
+    if (names.length == 1) {
+      return `${names[0][0]}`
+    }
     return `${names[0][0]}${names[1][0]}`
   }
 
