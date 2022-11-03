@@ -1,39 +1,19 @@
 import React from "react";
 import Navbar from "../components/Navbar";
-import { Box, Typography, Button, Container } from "@mui/material";
+import Hero from "../components/Hero";
+import Product from "../components/Product";
+import Pricing from "../components/Pricing";
+import Footer from "../components/Footer";
 
 class Landing extends React.Component {
   render() {
     return (
       <>
         <Navbar />
-        <Container maxWidth="lg" sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          height: "90vh",
-        }}>
-          <Box sx={{
-            width: "100%",
-            height: "70%",
-            background: "linear-gradient(180deg, rgba(35, 104, 162, 0.2) 0%, rgba(99, 162, 216, 0.2) 69.27%, rgba(170, 212, 245, 0.2) 100%)",
-            borderRadius: "75px 40px 200px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-evenly",
-          }}>
-            <Box sx={{ maxWidth: "35%" }}>
-              <Box marginBottom={2}>
-                <Typography variant="h3">Mine and Analyze Data</Typography>
-              </Box>
-              <Box marginBottom={3}>
-                <Typography variant="body1">Help people research on topics by mining data and getting a sentiment analysis</Typography>
-              </Box>
-              <Button variant="contained" >Get Started</Button>
-            </Box>
-            <Box component="img" src="../assets/landing-image-1.png" alt="landing page image" height={432} />
-          </Box>
-        </Container>
+        <Hero />
+        <Product />
+        <Pricing />
+        <Footer />
       </>
     );
   }
