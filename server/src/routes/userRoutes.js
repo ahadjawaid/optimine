@@ -1,8 +1,10 @@
-const { GetUser, GetUserUuid } = require("../controller/UserController");
+const { GetUser } = require("../controller/UserController");
 
 module.exports = (app) => {
   app.post("/api/user", async (req, res) => {
-    GetUser(req.headers.authorization).then(({ user, created }) => {
+    const { authorization } = req.headers;
+
+    GetUser(authorization).then(({ user, created }) => {
       res.status(created ? 201 : 200).send({ user });
     }).catch(() => {
       res.status(401);

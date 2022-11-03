@@ -1,10 +1,9 @@
+import config from "../data/config";
 import AuthService from "./AuthService";
-
-const keys = require("../data/config");
 
 class UserService {
   static async getUser() {
-    const response = await fetch(`${keys.apiURL}/user`, {
+    const response = await fetch(`${config.apiURL}/user`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
