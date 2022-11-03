@@ -49,13 +49,13 @@ class Product extends React.Component {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                height: "100vh",
+                height: "90",
             }}>
                 <Box className="curvedBox" sx={{
                     padding: "3rem 6rem",
                 }}>
                     <Box>
-                        <Typography marginBottom={3} align="center" variant="h3">How it works?</Typography>
+                        <Typography marginBottom={4} align="center" variant="h3">How it works?</Typography>
                         <Box marginBottom={10} sx={{
                                 display: "flex",
                                 flexDirection: "row",
@@ -66,7 +66,7 @@ class Product extends React.Component {
                         </Box>
                     </Box>
                     <Box>
-                        <Typography marginBottom={3} align="center" variant="h3">What it Does?</Typography>
+                        <Typography marginBottom={4} align="center" variant="h3">What it Does?</Typography>
                         <Box sx={{
                         display: "flex",
                         flexDirection: "row",
