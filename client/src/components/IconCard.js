@@ -5,7 +5,7 @@ class IconCard extends React.Component {
     render() {
         return (
             <Box sx={{
-                display: "border-box",
+                display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 flexDirection: "column",
