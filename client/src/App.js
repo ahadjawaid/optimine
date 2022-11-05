@@ -19,6 +19,7 @@ import "./data/App.css";
 const theme = require("./data/theme.js");
 
 class App extends React.Component {
+  // Contains routes for the pages
   render() {
     return (
       <ThemeProvider theme={theme}>

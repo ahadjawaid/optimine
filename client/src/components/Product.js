@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Box, Typography, Icon } from "@mui/material";
+import { Container, Box, Typography } from "@mui/material";
 import IconCard from "./IconCard";
 
 class Product extends React.Component {
@@ -55,7 +55,7 @@ class Product extends React.Component {
                     padding: "3rem 6rem",
                 }}>
                     <Box>
-                        <Typography marginBottom={4} align="center" variant="h3">How it works?</Typography>
+                        <Typography marginBottom={4} align="center" variant="h4">How it works?</Typography>
                         <Box marginBottom={10} sx={{
                                 display: "flex",
                                 flexDirection: "row",
@@ -66,7 +66,7 @@ class Product extends React.Component {
                         </Box>
                     </Box>
                     <Box>
-                        <Typography marginBottom={4} align="center" variant="h3">What it Does?</Typography>
+                        <Typography marginBottom={4} align="center" variant="h4">What it Does?</Typography>
                         <Box sx={{
                         display: "flex",
                         flexDirection: "row",
