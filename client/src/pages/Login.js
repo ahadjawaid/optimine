@@ -1,6 +1,7 @@
 import React from "react";
 import { Alert, Button, Link, Paper, Stack, Typography } from "@mui/material";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import DenyAccess from "../components/DenyAccess";
 import AuthField from "../components/AuthField";
 import AuthService from "../services/AuthService";
@@ -49,6 +50,8 @@ class Login extends React.Component {
             <Typography>Don't have an account? <Link href="/signup" sx={{ textDecoration: "none" }}>Sign Up</Link></Typography>
           </Paper>
         </Stack>
+
+        <Footer />
       </DenyAccess>
     );
   }

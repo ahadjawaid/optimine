@@ -61,6 +61,18 @@ async function GetUser(authorization) {
   return { user, created };
 }
 
+async function UpdateUser(authorization, values) {
+  const { user } = await GetUser(authorization);
+
+  Object.entries(values).forEach(([key, value]) => {
+    user[key] = value;
+  });
+  await user.save();
+  
+  return user;
+}
+
 module.exports.GetUserId = GetUserId;
 module.exports.CreateUser = CreateUser;
 module.exports.GetUser = GetUser;
+module.exports.UpdateUser = UpdateUser;

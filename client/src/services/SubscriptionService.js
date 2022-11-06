@@ -2,7 +2,7 @@ import config from "../data/config";
 import AuthService from "./AuthService";
 
 class SubscriptionService {
-  static getSubscriptions() {
+  static getSubscriptionOptions() {
     return [
       {
         title: "Basic",
@@ -42,7 +42,7 @@ class SubscriptionService {
     ];
   }
 
-  static async checkout(productKey) {
+  static async createCheckout(productKey) {
     const response = await fetch(`${config.apiURL}/create-checkout-session`, {
       method: "POST",
       headers: {
@@ -52,13 +52,32 @@ class SubscriptionService {
       body: JSON.stringify({ productKey: productKey }),
     });
 
-    console.log("received");
+    return response.json();
+  }
+
+  static async saveCheckout(checkoutSessionId) {
+    const response = await fetch(`${config.apiURL}/save-checkout-session`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${AuthService.accessToken}`,
+      },
+      body: JSON.stringify({ checkoutSessionId: checkoutSessionId }),
+    });
 
     return response.json();
   }
 
-  static async manage() {
-    console.log("managing subscriptions");
+  static async manageSubscriptions() {
+    const response = await fetch(`${config.apiURL}/create-portal-session`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${AuthService.accessToken}`,
+      },
+    });
+
+    return response.json();
   }
 }
 

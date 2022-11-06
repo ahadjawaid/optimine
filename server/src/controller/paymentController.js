@@ -1,9 +1,11 @@
 const config = require("../config");
+const assert = require('assert');
 const stripe = require("stripe")(config.stripeSecretAPIKey);
-const { GetUserId } = require("./userController");
+const { GetUser, UpdateUser } = require("./userController");
 
 async function CreateCheckoutSession(authorization, productKey) {
-  await GetUserId(authorization);
+  const { user } = await GetUser(authorization);
+  const { email, stripeCustomerId } = user;
 
   // get product price
   const prices = await stripe.prices.list({
@@ -12,7 +14,9 @@ async function CreateCheckoutSession(authorization, productKey) {
   });
 
   // create checkout session
+  let id = (stripeCustomerId === null) ? {customer_email: email} : {customer: stripeCustomerId};
   const session = await stripe.checkout.sessions.create({
+    ...id,
     billing_address_collection: "auto",
     line_items: [
       {
@@ -21,11 +25,37 @@ async function CreateCheckoutSession(authorization, productKey) {
     ],
     mode: "subscription",
     success_url: `${config.redirectDomain}/checkout?success=true&session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${config.redirectDomain}/pricing?canceled=true`,
+    cancel_url: `${config.redirectDomain}/checkout?canceled=true`,
   });
 
   // give checkout session url back to the client
   return session.url;
 }
 
-module.exports.CreateCheckoutSession = CreateCheckoutSession
+async function SaveCheckoutSession(authorization, checkoutSessionId) {
+  const checkoutSession = await stripe.checkout.sessions.retrieve(checkoutSessionId);
+  assert(checkoutSession.status === "complete", "Unable to save incomplete checkout session");
+
+  const { customer } = checkoutSession;
+  const user = await UpdateUser(authorization, { stripeCustomerId: customer });
+
+  return user;
+}
+
+async function CreatePortalSession(authorization) {
+  const { user } = await GetUser(authorization);
+  const { stripeCustomerId } = user;
+
+  // create portal session
+  const portalSession = await stripe.billingPortal.sessions.create({
+    customer: stripeCustomerId,
+    return_url: `${config.redirectDomain}/account`,
+  }).catch((error) => console.log(error.message));
+
+  // give portal session url back to the client
+  return portalSession.url;
+}
+
+module.exports.CreateCheckoutSession = CreateCheckoutSession;
+module.exports.SaveCheckoutSession = SaveCheckoutSession;
+module.exports.CreatePortalSession = CreatePortalSession;

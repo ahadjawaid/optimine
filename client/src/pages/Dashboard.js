@@ -2,6 +2,7 @@ import React from "react";
 import Typography from '@mui/material/Typography';
 import DenyAccess from "../components/DenyAccess"
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import UserService from "../services/UserService";
 
 class Dashboard extends React.Component {
@@ -29,7 +30,10 @@ class Dashboard extends React.Component {
     return (
       <DenyAccess when="loggedout" redirect="/login">
         <Navbar />
+
         <Typography variant="h1">{this.state.isLoaded ? this.state.user.name : "Dashboard"}</Typography>
+
+        <Footer />
       </DenyAccess>
     );
   }
