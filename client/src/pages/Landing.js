@@ -1,14 +1,20 @@
 import React from "react";
-import Typography from '@mui/material/Typography';
 import Navbar from "../components/Navbar";
+import Hero from "../components/Hero";
+import Product from "../components/Product";
+import Pricing from "../components/Pricing";
+import Footer from "../components/Footer";
 
 class Landing extends React.Component {
   render() {
     return (
-      <div>
+      <>
         <Navbar />
-        <Typography variant="h1">Landing</Typography>
-      </div>
+        <Hero />
+        <Product />
+        <Pricing />
+        <Footer />
+      </>
     );
   }
 }

@@ -63,3 +63,10 @@ Navigate to the `optimine/server` directory and start a local server. This serve
 ```shell
 node ./src/server.js
 ```
+or
+
+This server will dynamically update when changes are made:
+```shell
+nodemon ./src/server.js
+```
+

@@ -29,7 +29,7 @@ class Dashboard extends React.Component {
     return (
       <DenyAccess when="loggedout" redirect="/login">
         <Navbar />
-        <Typography variant="h1">{this.state.isLoaded && this.state.user.name || "Dashboard"}</Typography>
+        <Typography variant="h1">{this.state.isLoaded ? this.state.user.name : "Dashboard"}</Typography>
       </DenyAccess>
     );
   }

@@ -1,5 +1,12 @@
 # Getting Started with Create React App
 
+### Dependencies
+
+Before running the website you must install the dependencies and you can do this by running the following command in the ```/client``` folder:
+```shell
+npm install
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
