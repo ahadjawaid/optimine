@@ -1,4 +1,6 @@
-const Tweet = {
+const mongoose = require("mongoose");
+
+const TweetSchema = new mongoose.Schema ({
   body: {
     type: String
   },
@@ -23,6 +25,7 @@ const Tweet = {
   sentiment: {
     type: int
   }
-};
+});
 
+const Tweet = mongoose.model("tweet", TweetSchema);
 exports.Tweet = Tweet;
