@@ -1,8 +1,10 @@
 import React from "react";
-import Typography from '@mui/material/Typography';
+import { Typography, Box, Container, TextField, InputAdornment, Button } from '@mui/material';
 import DenyAccess from "../components/DenyAccess"
 import Navbar from "../components/Navbar";
 import UserService from "../services/UserService";
+import Search from '@mui/icons-material/Search';
+import Logo from "../components/Logo";
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -26,10 +28,49 @@ class Dashboard extends React.Component {
   }
 
   render() {
+    const centerStyle = {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }
+
     return (
       <DenyAccess when="loggedout" redirect="/login">
         <Navbar />
-        <Typography variant="h1">{this.state.isLoaded && this.state.user.name || "Dashboard"}</Typography>
+        <Container sx={{ 
+          display: "flex",
+          flexDirection: "column", 
+          height: "80vh",
+          justifyContent: "center",
+        }}>
+          <Box sx={{
+            display: "flex",
+            flexDirection: "column", 
+            height: "35%",
+            justifyContent: "space-between",
+          }}>
+            <Box>
+              <Typography fontWeight={800} align="center" variant="h2">optimine</Typography>
+            </Box>
+            <Box sx={centerStyle}>
+              <TextField
+                id="search-bar"
+                fullWidth
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Search />
+                    </InputAdornment>
+                  ),
+                }}
+                type="search"
+              />
+            </Box>
+            <Box sx={centerStyle}>
+              <Button variant="contained">Search</Button>
+            </Box>
+          </Box>
+        </Container>
       </DenyAccess>
     );
   }

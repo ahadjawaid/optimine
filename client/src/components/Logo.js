@@ -9,7 +9,7 @@ class Logo extends React.Component {
 
     return <Stack direction="row" alignItems="center" spacing={spacing}>
       <Box component="img" src="../assets/logo_black.png" alt="logo" height={imgHeight} />
-      <Typography href="/" sx={{ fontSize: fontSize, fontWeight: "bold" }} variant="h5" component="h2">Optimine</Typography>
+      <Typography href="/" sx={{ fontSize: fontSize, fontWeight: "bold" }} variant="h5" component="h2">optimine</Typography>
     </Stack>
   }
 }
