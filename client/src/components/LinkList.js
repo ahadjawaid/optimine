@@ -6,7 +6,7 @@ class LinkList extends React.Component {
     render() {
         return (
             <Box>
-                <Typography marginBottom={1} variant="h4">{this.props.title}</Typography>
+                <Typography  marginBottom={1} variant="h4">{this.props.title}</Typography>
                 <Box>
                     <ul>
                         {this.props.links.map(({text, link}, key) => {
