@@ -5,7 +5,7 @@ const cors = require('cors');
 const connect = require('./utilities/connect');
 const keys = require('./config');
 require('./models/User');
-require('./models/Tweet');
+require('./models/Analysis');
 
 const port = keys.port;
 const mongoURI = keys.mongoURI;
