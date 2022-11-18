@@ -4,7 +4,7 @@ import Hero from "../components/Hero";
 import Product from "../components/Product";
 import Pricing from "../components/Pricing";
 import Footer from "../components/Footer";
-import { Slide, useScrollTrigger } from "@mui/material";
+import { Stack, Slide, useScrollTrigger } from "@mui/material";
 
 function DynamicNavbar(props) {
   const { window } = props;
@@ -14,9 +14,9 @@ function DynamicNavbar(props) {
     window: window ? window() : undefined,
   });
 
-  return (trigger 
-    ? <Slide appear={false} direction="down" timeout={150} in={trigger}><Navbar/></Slide>
-    : <Navbar type="static"/>
+  return (trigger
+    ? <Slide appear={false} direction="down" timeout={150} in={trigger}><Navbar /></Slide>
+    : <Navbar type="static" />
   );
 }
 
@@ -24,11 +24,13 @@ class Landing extends React.Component {
   render() {
     return (
       <>
-        <DynamicNavbar/>
-        <Hero />
-        <Product />
-        <Pricing />
-        <Footer />
+        <DynamicNavbar />
+        <Stack alignItems="center" spacing={8}>
+          <Hero />
+          <Product />
+          <Pricing />
+          <Footer />
+        </Stack>
       </>
     );
   }

@@ -7,6 +7,7 @@ class SubscriptionService {
       {
         title: "Basic",
         specifications: [
+          "Access 3 public topics each month",
           "$0.04 per tweet",
         ],
         price: {
@@ -18,7 +19,7 @@ class SubscriptionService {
       {
         title: "Standard",
         specifications: [
-          "1,500 free tweets/month",
+          "1,500 free tweets each month",
           "$0.02 per additional tweet",
         ],
         price: {
@@ -30,7 +31,7 @@ class SubscriptionService {
       {
         title: "Premium",
         specifications: [
-          "15,000 free tweets/month",
+          "15,000 free tweets each month",
           "$0.01 per additional tweet",
         ],
         price: {

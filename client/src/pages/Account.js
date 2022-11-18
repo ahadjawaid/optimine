@@ -9,15 +9,7 @@ class Account extends React.Component {
   constructor(props) {
     super(props);
 
-    this.createSubscription = this.createSubscription.bind(this);
     this.manageSubscriptions = this.manageSubscriptions.bind(this);
-  }
-
-  createSubscription(event, productKey) {
-    event.preventDefault();
-    SubscriptionService.createCheckout(productKey).then((response) => {
-      window.location.replace(response.url);
-    });
   }
 
   manageSubscriptions(event) {
@@ -32,7 +24,6 @@ class Account extends React.Component {
       <Navbar />
 
       <Typography variant="h1">Account</Typography>
-      <Button onClick={(e) => this.createSubscription(e, "prod_MjEl0zTPhTWiX4")}>Create Subscription</Button>
       <Button onClick={this.manageSubscriptions}>Manage Subscriptions</Button>
 
       <Footer />

@@ -5,7 +5,6 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import UserService from "../services/UserService";
 import Search from '@mui/icons-material/Search';
-import Logo from "../components/Logo";
 
 class Dashboard extends React.Component {
   constructor(props) {

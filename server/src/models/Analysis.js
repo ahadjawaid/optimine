@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const Tweet = require("./Tweet");
 
 const AnalysisSchema = new mongoose.Schema({
     uuid: {
