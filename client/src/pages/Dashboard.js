@@ -2,9 +2,9 @@ import React from "react";
 import { Typography, Box, Container, TextField, InputAdornment, Button } from '@mui/material';
 import DenyAccess from "../components/DenyAccess"
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import UserService from "../services/UserService";
 import Search from '@mui/icons-material/Search';
-import Logo from "../components/Logo";
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -37,6 +37,7 @@ class Dashboard extends React.Component {
     return (
       <DenyAccess when="loggedout" redirect="/login">
         <Navbar />
+
         <Container sx={{ 
           display: "flex",
           flexDirection: "column", 
@@ -71,6 +72,8 @@ class Dashboard extends React.Component {
             </Box>
           </Box>
         </Container>
+
+        <Footer />
       </DenyAccess>
     );
   }

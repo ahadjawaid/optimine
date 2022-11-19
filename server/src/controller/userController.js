@@ -3,13 +3,12 @@ const assert = require('assert');
 const axios = require('axios');
 const keys = require('../config');
 const { User } = require("../models/User");
-const config = require("../config");
 
 const tenantId = keys.userfrontTenantID;
 const publicKey = keys.userfrontPublicKey;
 
-async function GetUserId(authHeader) {
-  const [tokenFormat, accessToken] = authHeader.split(" ");
+async function GetUserId(authorization) {
+  const [tokenFormat, accessToken] = authorization.split(" ");
   assert(tokenFormat == "Bearer", "Invalid token format");
 
   const key = await jose.importSPKI(publicKey, "RS256");
@@ -22,14 +21,14 @@ async function GetUserId(authHeader) {
   return { userId, userUuid };
 }
 
-async function CreateUser(authHeader) {
-  const { userId } = await GetUserId(authHeader);
+async function CreateUser(authorization) {
+  const { userId } = await GetUserId(authorization);
   const response = await axios({
     method: "GET",
     url: `https://api.userfront.com/v0/users/${userId}`,
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${config.userfrontAPIKey}`,
+      Authorization: `Bearer ${keys.userfrontAPIKey}`,
     },
   });
 
@@ -45,8 +44,8 @@ async function CreateUser(authHeader) {
   return user;
 }
 
-async function GetUser(authHeader) {
-  const { userId, userUuid } = await GetUserId(authHeader);
+async function GetUser(authorization) {
+  const { userId, userUuid } = await GetUserId(authorization);
 
   let created = false;
   let user = await User.findOne({
@@ -56,12 +55,24 @@ async function GetUser(authHeader) {
 
   if (user == null) {
     created = true;
-    user = await CreateUser(authHeader);
+    user = await CreateUser(authorization);
   }
 
   return { user, created };
 }
 
+async function UpdateUser(authorization, values) {
+  const { user } = await GetUser(authorization);
+
+  Object.entries(values).forEach(([key, value]) => {
+    user[key] = value;
+  });
+  await user.save();
+  
+  return user;
+}
+
 module.exports.GetUserId = GetUserId;
 module.exports.CreateUser = CreateUser;
 module.exports.GetUser = GetUser;
+module.exports.UpdateUser = UpdateUser;

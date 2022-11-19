@@ -28,6 +28,7 @@ app.use(cors({
 
 connect(mongoURI);
 require('./routes/userRoutes')(app);
+require('./routes/subscriptionRoutes')(app);
 
 app.listen(port, () => {
     console.log(`Running on port ${port}`);

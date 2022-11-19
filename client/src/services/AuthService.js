@@ -1,5 +1,4 @@
 import Userfront from "@userfront/core";
-import UserService from "./UserService";
 
 const keys = require("../data/config");
 Userfront.init(keys.userfrontTenantID);

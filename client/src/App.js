@@ -8,6 +8,8 @@ import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Search from "./pages/Search";
+import Account from "./pages/Account";
+import PricingPage from "./pages/PricingPage";
 import Settings from "./pages/Settings";
 
 // Redux
@@ -16,6 +18,7 @@ import { ThemeProvider } from "@mui/material";
 
 // Theming
 import "./data/App.css";
+import Checkout from "./pages/Checkout";
 const theme = require("./data/theme.js");
 
 class App extends React.Component {
@@ -30,7 +33,10 @@ class App extends React.Component {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/search" element={<Search />} />
+            <Route path="/account" element={<Account />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/pricing" element={<PricingPage />} />
+            <Route path="/checkout" element={<Checkout />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
