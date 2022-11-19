@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import React from "react";
 import DenyAccess from "../components/DenyAccess";
 import Footer from "../components/Footer";
@@ -12,6 +12,7 @@ class Checkout extends React.Component {
     this.state = {
       success: false,
       sessionId: null,
+      canceled: false,
     };
   }
 
@@ -27,13 +28,27 @@ class Checkout extends React.Component {
 
       SubscriptionService.saveCheckout(sessionId);
     }
+
+    if (Boolean(query.get("canceled"))) {
+      this.setState({
+        canceled: true,
+      })
+    }
   }
 
   render() {
     return <DenyAccess when="loggedout" redirect="/login">
       <Navbar />
 
-      <Typography variant="h1">Checkout</Typography>
+      <Container sx={{ 
+        width: "100vw", 
+        height: "80vh", 
+        alignItems: "center", 
+        justifyContent: "center", 
+        display: "flex" 
+      }}>
+        <Typography variant="h1">{this.state.canceled ? "Checkout Canceled" : (this.state.success ? "Checkout Successful" : "Checkout Failed")}</Typography>
+      </Container>
 
       <Footer />
     </DenyAccess>

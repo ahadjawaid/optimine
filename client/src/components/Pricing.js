@@ -35,7 +35,7 @@ class Pricing extends React.Component {
         alignItems: "center",
         justifyContent: "center",
       }}>
-        <Stack className="curvedBox" sx={{ padding: "5rem 7.5rem" }}>
+        <Stack className={this.props.className} sx={{ padding: "5rem 7.5rem", width: "100%" }}>
           <Typography marginBottom={5} align="center" variant="h4">Pricing</Typography>
           <Stack direction="row" alignItems="stretch" justifyContent="space-between" mb={5}>
             {this.state.subscriptionOptions.map((subscription) =>

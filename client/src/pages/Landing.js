@@ -28,7 +28,7 @@ class Landing extends React.Component {
         <Stack alignItems="center" spacing={8}>
           <Hero />
           <Product />
-          <Pricing />
+          <Pricing className="curvedBox" />
           <Footer />
         </Stack>
       </>
