@@ -1,4 +1,3 @@
-// Search for Tweets within the past seven days
 const config = require("../config");
 const axios = require('axios');
 const { Analysis } = require("../models/Analysis");
@@ -35,12 +34,13 @@ async function getRequest(hashtag,requestUuid) {
             likes: tweetData[i].public_metrics.like_count, 
             sentiment: 1
         }
-        let doc = await Student.findOne({ uuid: requestUuid })
+        let doc = await Analysis.findOne({ uuid: requestUuid })
         doc.tweets.push(tweet)
         await doc.save()
     };
 }
 
 module.exports.getRequest = getRequest;
+
 
 
