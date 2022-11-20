@@ -30,7 +30,7 @@ class Pricing extends React.Component {
 
   render() {
     return (
-      <Container maxWidth="lg" sx={{
+      <Container id="pricing" component="div" maxWidth="lg" sx={{
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -59,6 +59,7 @@ class Pricing extends React.Component {
                 "Get full access to our API",
               ]}
               buttonText="Contact Us"
+              link="/contact"
             />
           </Box>
         </Stack>

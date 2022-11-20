@@ -7,8 +7,15 @@ import UserAvatar from "./UserAvatar";
 import AuthService from "../services/AuthService";
 import Logo from "./Logo";
 
-const defaultPages = ["Product", "Pricing"];
-const userPages = ["Explore", "Queries"];
+const defaultPages = [
+  { text: "Product", link: "#product" },
+  { text: "Pricing", link: "#pricing" },
+];
+
+const userPages = [
+  { text: "Explore", link: "/explore" },
+  { text: "Queries", link: "/queries" },
+];
 
 const navButtonStyle = {
   padding: 2,
@@ -61,8 +68,8 @@ class Navbar extends React.Component {
         <Box component="div" sx={{ flexGrow: 1 }} />
 
         <Stack direction="row" alignItems="center" spacing={1.2} component="div">
-          {pages.map((page, key) =>
-            <Button key={key} href={"/" + page.toLowerCase()} sx={pageButtonStyle} variant="text" color="inherit">{page}</Button>
+          {pages.map(({text, link}, key) =>
+            <Button key={key} href={link} sx={pageButtonStyle} variant="text" color="inherit">{text}</Button>
           )}
 
           {AuthService.authenticated && 

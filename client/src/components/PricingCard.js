@@ -34,9 +34,14 @@ class PricingCard extends React.Component {
       </CardContent>
 
       <CardActions>
+        {this.props.link ? 
+        <Button href={this.props.link} variant="contained" color="primary" fullWidth sx={{
+          textTransform: "none"
+        }}>{this.props.buttonText}</Button> : 
         <Button variant="contained" color="primary" fullWidth onClick={this.props.onClick} sx={{
           textTransform: "none"
-        }}>{this.props.buttonText}</Button>
+        }}>{this.props.buttonText}</Button>}
+
       </CardActions>
     </Card>;
   }

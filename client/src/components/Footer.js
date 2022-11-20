@@ -23,25 +23,25 @@ class Footer extends React.Component {
                     <LinkList
                         title="Pages"
                         links={[
-                            {text: "Product", link: "/"},
-                            {text: "Pricing", link: "/"},
-                            {text: "Contact Us", link: "/"},
+                            {text: "Product", link: "#product"},
+                            {text: "Pricing", link: "#pricing"},
+                            {text: "Contact Us", link: "/contact"},
                         ]}
                     />
                     <LinkList
                         title="Legal"
                         links={[
-                            {text: "Terms", link: "/"},
-                            {text: "Privacy", link: "/"},
-                            {text: "Cookies", link: "/"},
-                            {text: "Copyright", link: "/"},
+                            {text: "Terms", link: "/terms"},
+                            {text: "Privacy", link: "/privacy"},
+                            {text: "Cookies", link: "/cookie"},
+                            {text: "Copyright", link: "/copywrite"},
                         ]}
                     />
                     <LinkList
                         title="Contact Us"
                         links={[
-                            {text: "LinkedIn", link: "/"},
-                            {text: "optimine@gmail.com", link: "/"},
+                            {text: "LinkedIn", link: "https://www.linkedin.com"},
+                            {text: "optimine@gmail.com", link: "mailto:optimine@gmail.com"},
                         ]}
                     />
                 </Box>

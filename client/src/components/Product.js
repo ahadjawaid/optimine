@@ -45,7 +45,7 @@ class Product extends React.Component {
 
 
     return (
-      <Container maxWidth="lg" sx={{
+      <Container id="product" component="div" maxWidth="lg" sx={{
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
