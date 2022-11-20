@@ -10,6 +10,7 @@ import SignUp from "./pages/SignUp";
 import Account from "./pages/Account";
 import PricingPage from "./pages/PricingPage";
 import Settings from "./pages/Settings";
+import DefaultPage from "./pages/DefaultPage";
 
 // Redux
 import { fetchUser } from './store/actions';
@@ -35,6 +36,11 @@ class App extends React.Component {
             <Route path="/settings" element={<Settings />} />
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/privacy" element={<DefaultPage>Privacy</DefaultPage>} />
+            <Route path="/cookie" element={<DefaultPage>Cookies</DefaultPage>} />
+            <Route path="/copywrite" element={<DefaultPage>Copyright</DefaultPage>} />
+            <Route path="/terms" element={<DefaultPage>Terms and Conditions</DefaultPage>} />
+            <Route path="/contact" element={<DefaultPage>Contact Us</DefaultPage>} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

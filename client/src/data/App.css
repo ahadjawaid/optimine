@@ -4,6 +4,7 @@ html, body {
   background-color: #EEF2F6;
   box-sizing: border-box;
   font-family: "Roboto";
+  scroll-behavior: smooth;
 }
 
 ul {
