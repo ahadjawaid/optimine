@@ -1,6 +1,38 @@
 # Optimine
 
-## Basic Git Commands
+## Running the Final Product
+
+To run this project on your local machine, first ensure you have `node.js` and `npm` installed. [Here is a tutorial](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
+
+Then, you will need to download the `dev.js` configuration file which contains secret API keys and copy it into the `optimine/server/src/config` directory.
+
+```shell
+mv <path/to/dev.js> server/src/config
+```
+
+Finally, to run the project you will need 2 seperate processes running on your machine, one for each the front and back-end servers. This is easily accomplished by running each server in a seperate terminal session.
+
+### Back End
+Navigate to the `optimine/server` directory, execute `npm install`, and start a local server.
+
+```shell
+cd server
+npm install
+node ./src/server.js
+```
+
+### Front End
+Navigate to the `optimine/client` directory, execute `npm install`, and start a local web server.
+
+```shell
+cd client
+npm install
+npm start
+```
+
+## Project Development
+
+This project is developed using `node.js` and `npm`, which must be installed on your machine. The following sections contain guidelines for development using git.
 
 ### How to clone repository?
 
@@ -47,26 +79,3 @@ git checkout -b <branch name>
 2. Complete work on your development branch. See [How to make changes to the repository?](#how-to-make-changes-to-the-repository)
 
 3. Push all changes to the remote repository, open a pull request on github, and notify team members to review your work and merge your development branch.
-
-## Project Development
-
-This project is developed using `node.js` and `npm`, which must be installed on your machine.
-
-### Front End
-Navigate to the `optimine/client` directory and start a local web server. The server will dynamically update as you save changes.
-```shell
-npm start
-```
-
-### Back End
-Navigate to the `optimine/server` directory and start a local server. This server will *not* dynamically update.
-```shell
-node ./src/server.js
-```
-or
-
-This server will dynamically update when changes are made:
-```shell
-nodemon ./src/server.js
-```
-
