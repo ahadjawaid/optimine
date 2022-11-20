@@ -27,9 +27,9 @@ async function CreateCheckoutSession(authorization, productKey) {
   const { user } = await GetUser(authorization);
   const { email, stripeCustomerId } = user;
 
-  const subscription = GetSubscription(authorization);
-  if (subscription != null)
+  await GetSubscription(authorization).then(() => {
     return CreatePortalSession(authorization);
+  }).catch(() => {});
 
   // get product price
   const prices = await stripe.prices.list({
