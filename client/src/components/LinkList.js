@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Link, Typography } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
 
 
 class LinkList extends React.Component {
@@ -14,7 +15,8 @@ class LinkList extends React.Component {
                                 <li key={key}>
                                     <Typography 
                                         variant="body1"
-                                        component={Link}
+                                        component={link[0] == "/" ? RouterLink: Link}
+                                        to={link}
                                         href={link}
                                         sx={{
                                             color: "#000",
