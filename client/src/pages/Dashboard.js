@@ -71,6 +71,8 @@ class Dashboard extends React.Component {
             </Box>
           </Box>
         </Container>
+
+        <Footer />
       </DenyAccess>
     );
   }
