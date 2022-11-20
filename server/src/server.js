@@ -19,16 +19,10 @@ app.use(cors({
   origin: keys.redirectDomain,
 }));
 
-// app.use(
-//     cookieSession({
-//         maxAge: 30 * 24 * 60 * 60 * 1000,
-//         keys: [keys.cookieKey]
-//     })
-// );
-
 connect(mongoURI);
 require('./routes/userRoutes')(app);
 require('./routes/subscriptionRoutes')(app);
+require('./routes/analysisRoutes')(app);
 
 app.listen(port, () => {
     console.log(`Running on port ${port}`);

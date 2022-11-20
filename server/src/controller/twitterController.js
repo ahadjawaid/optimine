@@ -1,4 +1,3 @@
-// Search for Tweets within the past seven days
 const config = require("../config");
 const axios = require('axios');
 
@@ -17,21 +16,10 @@ async function getRequest(hashtag) {
     if (res.body) {
         return res.body;
     } else {
-        throw new Error('Unsuccessful request');
+        // throw new Error('Unsuccessful request');
+        console.log("request failed");
     }
 }
-(async () => {
-    try {
-        const response = await getRequest();
-        console.dir(response, {
-            depth: null
-        });
-    } catch (e) {
-        console.log(e);
-        process.exit(-1);
-    }
-    process.exit();
-})();
 
 module.exports.getRequest = getRequest;
 
