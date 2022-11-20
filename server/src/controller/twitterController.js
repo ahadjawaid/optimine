@@ -10,14 +10,17 @@ async function getRequest(hashtag,requestUuid) {
         'expansions': 'author_id',
         'max_results': '100'
     }
+    
     const res = await axios.get({url: 'https://api.twitter.com/2/tweets/search/recent', params: param, 
         headers: {
             "User-Agent": "v2RecentSearchJS",
             "authorization": `Bearer ${config.userfrontAPIKey}`
         }})
+
     if (res.body) {
-        throw new Error('Unsuccessful request');
+        console.log('Unsuccessful request');
     }
+
     let tweetData = res.data;
     let tweetUsers = res.users;
     let tweetMeta = res.meta;
@@ -37,18 +40,6 @@ async function getRequest(hashtag,requestUuid) {
         await doc.save()
     };
 }
-(async () => {
-    try {
-        const response = await getRequest();
-        console.dir(response, {
-            depth: null
-        });
-    } catch (e) {
-        console.log(e);
-        process.exit(-1);
-    }
-    process.exit();
-})();
 
 module.exports.getRequest = getRequest;
 
