@@ -13,7 +13,7 @@ const defaultPages = [
 ];
 
 const userPages = [
-  { text: "Explore", link: "/explore" },
+  { text: "Search", link: "/dashboard" },
   { text: "Queries", link: "/queries" },
 ];
 

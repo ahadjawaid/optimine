@@ -4,6 +4,7 @@ import DenyAccess from "../components/DenyAccess"
 import Navbar from "../components/Navbar";
 import UserService from "../services/UserService";
 import Search from '@mui/icons-material/Search';
+import AnalysisService from "../services/AnalysisService";
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -24,6 +25,12 @@ class Dashboard extends React.Component {
         isLoaded: true,
       });
     });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    AnalysisService.request(e.target.topic.value);
+    e.target.topic.value = "";
   }
 
   render() {
@@ -52,23 +59,26 @@ class Dashboard extends React.Component {
             <Box>
               <Typography fontWeight={800} align="center" variant="h2">optimine</Typography>
             </Box>
-            <Box sx={centerStyle}>
-              <TextField
-                id="search-bar"
-                fullWidth
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <Search />
-                    </InputAdornment>
-                  ),
-                }}
-                type="search"
-              />
-            </Box>
-            <Box sx={centerStyle}>
-              <Button variant="contained">Search</Button>
-            </Box>
+            <form onSubmit={this.handleSubmit}>
+              <Box marginBottom={5} sx={centerStyle}>
+                <TextField
+                  id="search-bar"
+                  fullWidth
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Search />
+                      </InputAdornment>
+                    ),
+                  }}
+                  type="text"
+                  name="topic"
+                />
+              </Box>
+              <Box sx={centerStyle}>
+                <Button type="submit" variant="contained">Search</Button>
+              </Box>
+            </form>
           </Box>
         </Container>
       </DenyAccess>
