@@ -48,7 +48,11 @@ class Navbar extends React.Component {
     let pageButtonStyle = AuthService.authenticated ? {} : {...navButtonStyle, ...defaultPageButtonStyle}
     let userMenuOpen = Boolean(this.state.toggleUserMenu);
 
-    return <AppBar position="static" color="background" sx={{ padding: 0.5 }}>
+    let position = (this.props.type === "static") ? "static" : "sticky"
+    let elevation = (this.props.type === "static") ? 0 : 4
+    let color = (this.props.type === "static") ? "transparent" : "background"
+
+    return <AppBar position={position} elevation={elevation} color={color} sx={{ padding: 1 }}>
       <Toolbar>
         <ButtonBase component="a" href={AuthService.authenticated ? "/dashboard" : "/"} disableRipple>
           <Logo />
@@ -70,8 +74,8 @@ class Navbar extends React.Component {
               </Tooltip>
 
               <Menu anchorEl={this.state.toggleUserMenu} open={userMenuOpen} onClose={this.closeUserMenu}>
-                <MenuItem component="a" href="/profile">
-                  <ListItemIcon><AccountCircle /></ListItemIcon> Profile
+                <MenuItem component="a" href="/account">
+                  <ListItemIcon><AccountCircle /></ListItemIcon> Account
                 </MenuItem>
                 <Divider />
                 <MenuItem component="a" href="/settings">

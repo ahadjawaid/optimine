@@ -1,85 +1,68 @@
 import React from "react";
-import { Container, Box, Typography } from "@mui/material";
+import { Container, Typography, Stack } from "@mui/material";
 import IconCard from "./IconCard";
 
 class Product extends React.Component {
-    renderCardList(cardListInfo) {
-        return (cardListInfo.map(({ iconPath, subheading, body }, key) => {
-            return (
-                <IconCard key={key} iconPath={iconPath} subheading={subheading} body={body} />
-            );
-        }));
-    }
+  renderCardList(cardListInfo) {
+    return (cardListInfo.map(({ iconPath, subheading, body }, key) => {
+      return (
+        <IconCard key={key} iconPath={iconPath} subheading={subheading} body={body} />
+      );
+    }));
+  }
 
-    render() {
-        const firstCardList = [
-            {
-                iconPath: "../assets/icon-search.png",
-                subheading: "Search the Topic", 
-                body: "Pick the topic you want to mine on and search the term",
-            },
-            {
-                iconPath: "../assets/icon-select.png",
-                subheading: "Select the topic", 
-                body: "Select the topic you want the analysis on",
-            },
-            {
-                iconPath: "../assets/icon-delivery.png",
-                subheading: "Get the analysis", 
-                body: "Request the analysis and get you analysis in a prompt amount of time",
-            },
-        ]
+  render() {
+    const firstCardList = [
+      {
+        iconPath: "../assets/icon-search.png",
+        subheading: "Search",
+        body: "Use key words to find the topic you want analyzed",
+      },
+      {
+        iconPath: "../assets/icon-select.png",
+        subheading: "Select",
+        body: "Select the category for your analysis",
+      },
+      {
+        iconPath: "../assets/icon-delivery.png",
+        subheading: "Analyze",
+        body: "Gain valiable insights into the topic of your choosing",
+      },
+    ]
 
-        const secondCardList = [
-            {
-                iconPath: "../assets/icon-dashboard.png",
-                subheading: "Analytics", 
-                body: "Optimine provides users easy accessibility to online opinions mined from social media sites using sentiment analysis",
-            },
-            {
-                iconPath: "../assets/icon-opinion.png",
-                subheading: "Opinions", 
-                body: "Optimine will be an easy to use application that allows users to get an economical and insightful analysis on a topic of their choosing based on the opinions found from social media sites.",
-            },
-        ]
+    const secondCardList = [
+      {
+        iconPath: "../assets/icon-dashboard.png",
+        subheading: "Analytics",
+        body: "Optimine provides easy accessibility to online sentiment gathered from social media sites using our machine learning model",
+      },
+      {
+        iconPath: "../assets/icon-opinion.png",
+        subheading: "Opinions",
+        body: "Optimine is easy to use and provides an economical and insightful analysis on a topic of your choosing based on online opinions.",
+      },
+    ]
 
 
-        return (
-            <Container maxWidth="lg" sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                height: "90",
-            }}>
-                <Box className="curvedBox" sx={{
-                    padding: "3rem 6rem",
-                }}>
-                    <Box>
-                        <Typography marginBottom={4} align="center" variant="h4">How it works?</Typography>
-                        <Box marginBottom={10} sx={{
-                                display: "flex",
-                                flexDirection: "row",
-                                alignItems: "center",
-                                justifyContent: "space-between",
-                        }}>
-                            {this.renderCardList(firstCardList)}
-                        </Box>
-                    </Box>
-                    <Box>
-                        <Typography marginBottom={4} align="center" variant="h4">What it Does?</Typography>
-                        <Box sx={{
-                        display: "flex",
-                        flexDirection: "row",
-                        alignItems: "center",
-                        justifyContent: "space-around",
-                    }}>
-                            {this.renderCardList(secondCardList)}
-                        </Box>
-                    </Box>
-                </Box>
-            </Container>
-        );
-    }
+    return (
+      <Container maxWidth="lg" sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}>
+        <Stack className="curvedBox" spacing={8} sx={{ padding: "3rem 6rem" }}>
+          <Typography mt={2} align="center" variant="h4">How it works?</Typography>
+          <Stack direction="row" alignItems="flex-start" justifyContent="space-between" marginBottom={10}>
+            {this.renderCardList(firstCardList)}
+          </Stack>
+          <Typography mt={2} align="center" variant="h4">What it Does?</Typography>
+          <Stack direction="row" alignItems="flex-start" justifyContent="space-around">
+            {this.renderCardList(secondCardList)}
+          </Stack>
+        </Stack>
+      </Container>
+    );
+  }
 }
 
 export default Product;

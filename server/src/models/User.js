@@ -9,6 +9,9 @@ const UserSchema = new mongoose.Schema({
     type: String,
     unique: true,
   },
+  stripeCustomerId: {
+    type: String,
+  },
   name: {
     type: String,
   },
