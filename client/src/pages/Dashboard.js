@@ -2,7 +2,6 @@ import React from "react";
 import { Typography, Box, Container, TextField, InputAdornment, Button } from '@mui/material';
 import DenyAccess from "../components/DenyAccess"
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import UserService from "../services/UserService";
 import Search from '@mui/icons-material/Search';
 

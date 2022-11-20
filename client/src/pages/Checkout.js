@@ -1,7 +1,6 @@
 import { Container, Typography } from "@mui/material";
 import React from "react";
 import DenyAccess from "../components/DenyAccess";
-import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import SubscriptionService from "../services/SubscriptionService";
 
@@ -50,7 +49,6 @@ class Checkout extends React.Component {
         <Typography variant="h1">{this.state.canceled ? "Checkout Canceled" : (this.state.success ? "Checkout Successful" : "Checkout Failed")}</Typography>
       </Container>
 
-      <Footer />
     </DenyAccess>
   }
 }
