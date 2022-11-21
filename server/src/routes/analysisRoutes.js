@@ -1,18 +1,18 @@
-const { getRequest } = require("../controller/twitterController");
+const { getTweets } = require("../controller/twitterController");
 const { getSentiment } = require("../controller/analysisController");
+
 
 
 module.exports = (app) => {
     app.post("/api/request-analysis", async (req, res) => {
-        // const { authorization } = req.headers;
+        const { authorization } = req.headers;
         const { topic } = req.body;
-        console.log(topic);
 
-        tweets = await getRequest(topic);
-        console.log(tweets);
+        const { user } = GetUser(authorization);
+        const rawTweets = await getTweets(topic).data;
 
-        res.status(201).send(tweets);
+        const analysis = getAnalysis(user, topic, rawTweets);
 
-        // sentiment = getSentiment(tweets);
+        res.status(201).send(analysis);
     });
 }

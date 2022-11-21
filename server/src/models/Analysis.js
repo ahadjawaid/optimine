@@ -28,9 +28,6 @@ const AnalysisSchema = new mongoose.Schema({
         poster: {
         type: String
         },
-        date: {
-        type: String,
-        },
         retweets: {
         type: Number
         },
