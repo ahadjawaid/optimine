@@ -7,7 +7,7 @@ async function getTweets(hashtag) {
             'query': `#${hashtag} lang:en`,
             'tweet.fields': 'public_metrics',
             'expansions': 'author_id',
-            'max_results': '10'
+            'max_results': '100'
         }, 
         headers: {
             "User-Agent": "v2RecentSearchJS",
