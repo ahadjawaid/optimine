@@ -1,17 +1,40 @@
 const tf = require("@tensorflow/tfjs-node");
-const config = require("../config");
+const word2index = require("../tfjs/tokenizer.json");
 
+function getWords(text){
+    var words = text.split(" ");
+    return words;
+}
+
+function getTokenised(words) {
+    var wordTokens = [];
+    for (let i = 0; i < words.length; i++) {
+        if (word2index[words[i].toLowerCase()] != undefined && wordTokens.length < 50) {
+            wordTokens.push(word2index[words[i].toLowerCase()]);
+        }
+    }
+    for (let i = 0; i < 50; i++) {
+        if (wordTokens.length < 50) {
+            wordTokens.push(0);
+        }
+    }
+    return new Array(wordTokens);
+}
 
 async function getSentiment(text) {
-    model = await tf.loadLayersModel("file://src/tfjs_model/model.json");
-
-    // const out = model.predict(processedText);
-    // console.log(out);
-    
+    const model = await tf.loadLayersModel("file://server/src/tfjs/model.json");
+    const seedWordToken = tf.tensor2d(getTokenised(getWords(text)));
+    const predict = await model.predict(seedWordToken).data();
+    const p = predict[0];
+    if (p > 0.5)
+        result = 1;
+    else
+        result = 0;
+    return result;
 }
 
 async function getAnalysis(user, topic, rawTweets) {
-        const tweets = []
+        const tweets = [];
         
         let postiveCount, negativeCount, neutralCount = 0;
 
@@ -43,5 +66,6 @@ async function getAnalysis(user, topic, rawTweets) {
         return analysis;
 }
 
+//Just pass in a string of text to get the sentiment
 module.exports.getSentiment = getSentiment;
 module.exports.getAnalysis = getAnalysis;
