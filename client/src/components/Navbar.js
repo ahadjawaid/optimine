@@ -14,7 +14,7 @@ const defaultPages = [
 
 const userPages = [
   { text: "Search", link: "/dashboard" },
-  { text: "Queries", link: "/queries" },
+  { text: "Queries", link: "/dashboard" },
 ];
 
 const navButtonStyle = {
