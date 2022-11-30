@@ -1,4 +1,4 @@
-import { Paper, Typography } from "@mui/material";
+import { Button, Paper, Typography } from "@mui/material";
 import React from "react";
 
 class Rating extends React.Component {
@@ -13,11 +13,23 @@ class Rating extends React.Component {
       ? "Positive"
       : "Negative"
 
+    if (this.props.onClick !== null) {
+      return <Button elevation={0} sx={{
+        backgroundColor: backgroundColor,
+        border: `1px solid ${color}`,
+        padding: 0.5,
+        width: "100px",
+        textTransform: "none",
+      }} onClick={this.props.onClick}>
+        <Typography color={color} textAlign="center">{text}</Typography>
+      </Button>
+    }
+
     return <Paper elevation={0} sx={{
       backgroundColor: backgroundColor,
       border: `1px solid ${color}`,
       padding: 0.5,
-      width: "100px"
+      width: "100px",
     }}>
       <Typography color={color} textAlign="center">{text}</Typography>
     </Paper>;

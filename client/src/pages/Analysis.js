@@ -1,4 +1,4 @@
-import { Box, Paper, Stack, Typography } from "@mui/material";
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Paper, Stack, Typography } from "@mui/material";
 import { PieChart, Pie, Cell } from "recharts";
 import React from "react";
 import DenyAccess from "../components/DenyAccess";
@@ -64,7 +64,27 @@ class Analysis extends React.Component {
     this.state = {
       uuid: null,
       data: null,
+      feedback: false,
+      feedbackBody: null,
     };
+
+    this.submitFeedback = this.submitFeedback.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+  }
+
+  submitFeedback(body) {
+    console.log(body);
+    this.setState({
+      feedback: true,
+      feedbackBody: body,
+    });
+  }
+
+  handleClose() {
+    this.setState({
+      feedback: false,
+      feedbackBody: null,
+    });
   }
 
   componentDidMount() {
@@ -91,6 +111,27 @@ class Analysis extends React.Component {
 
     return <DenyAccess when="loggedout" redirect="/login">
       <Navbar />
+
+      <Dialog open={this.state.feedback} onClose={this.handleClose}>
+        <DialogTitle>Submit Feedback</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            If the analysis for the following tweet seems incorrect, let us know so we can make improvements in the future.
+          </DialogContentText>
+          <Box height="16px" />
+          <DialogContentText ml={1}>
+            {this.state.feedbackBody}
+          </DialogContentText>
+          <Box height="16px" />
+          <DialogContentText>
+            *Note: submitting feedback won't affect this analysis.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={this.handleClose}>Cancel</Button>
+          <Button onClick={this.handleClose}>Submit</Button>
+        </DialogActions>
+      </Dialog>
 
       {this.state.uuid !== null &&
         <Stack direction="row" padding={4} spacing={6} height="78vh">
@@ -132,7 +173,7 @@ class Analysis extends React.Component {
             </Stack>
           </Paper>
 
-          <Paper sx={{ ...paperStyle, overflowY: "hidden" }}>
+          <Paper sx={{ ...paperStyle, overflowY: "auto", height: "380px", maxHeight: "380px" }}>
             <Box>
               <Stack direction="column" spacing={2}>
                 {data.tweets.map((tweet, index) => {
@@ -145,7 +186,9 @@ class Analysis extends React.Component {
                     <Stack direction="row" spacing={2} alignItems="start" justifyContent="space-between">
                       <Typography width="20px" sx={{ color: "#818181" }}>{index + 1}</Typography>
                       <Typography width="400px">{tweet.body}</Typography>
-                      <Rating variant={variant} />
+                      <Rating variant={variant} onClick={() => {
+                        this.submitFeedback(`${variant.toUpperCase()}: "${tweet.body}"`)
+                      }} />
                     </Stack>
                   </Stack>;
                 })}
