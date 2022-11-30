@@ -31,27 +31,6 @@ const trending = [
   }
 ];
 
-// const savedQueries = [
-//   {
-//     uuid: "974a264f-d3a7-49c0-ad6d-474bfeac5880",
-//     positive: 0.4,
-//     negative: 0.6,
-//     numberOfTweets: 182,
-//   },
-//   {
-//     uuid: "0feea17e-77b3-4b74-b2ff-2e3adc59b7ee",
-//     positive: 0.1,
-//     negative: 0.9,
-//     numberOfTweets: 376,
-//   },
-//   {
-//     uuid: "3094b601-0bb5-400a-9b1c-570e0c06ff43",
-//     positive: 0.7,
-//     negative: 0.3,
-//     numberOfTweets: 73,
-//   },
-// ];
-
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
@@ -67,8 +46,7 @@ class Dashboard extends React.Component {
       return;
 
     const savedQueries = await AnalysisService.getUser();
-    console.log(savedQueries);
-
+  
 
     UserService.getUser().then((response) => {
       this.setState({
@@ -144,13 +122,13 @@ class Dashboard extends React.Component {
 
           {(this.state.savedQueries.length > 0) &&
             <Stack direction="column" ml={3} mr={2} spacing={2}>
-              {this.state.savedQueries.map((query) => {
-                let variant = (query.positive >= query.negative)
+              {this.state.savedQueries.map((query, key) => {
+                let variant = (query.postive >= query.negative)
                   ? "positive"
                   : "negative"
-                let link = `/analysis?uuid=${query.uuid}`;
+                let link = `/analysis?uuid=${query.uuid}&key=${key}`;
 
-                return <Stack direction="row" alignItems="center" justifyContent="space-between">
+                return <Stack  direction="row" alignItems="center" justifyContent="space-between">
                   <Typography variant="h6" component="a" href={link} width="400px" sx={{
                     textDecoration: "none",
                   }}>{query.topic}</Typography>
