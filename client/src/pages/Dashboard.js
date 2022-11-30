@@ -68,7 +68,7 @@ class Dashboard extends React.Component {
 
     const savedQueries = await AnalysisService.getUser();
     console.log(savedQueries);
-  
+
 
     UserService.getUser().then((response) => {
       this.setState({
@@ -95,13 +95,16 @@ class Dashboard extends React.Component {
       <Navbar />
 
       <Stack direction="column" spacing={4} padding={6}>
-        <Paper sx={paperStyle}>
+        <Paper sx={{
+          ...paperStyle,
+          background: "linear-gradient(180deg, rgba(35, 104, 162, 0.2) 0%, rgba(99, 162, 216, 0.2) 69.27%, rgba(170, 212, 245, 0.2) 100%)",
+        }}>
           <Stack direction="row" justifyContent="space-between" sx={{ paddingLeft: 6, paddingRight: 12 }}>
             <Stack direction="column" width="60%">
               <Typography fontWeight={800} variant="h4" mb={4} mt={3} sx={{
                 color: "#2c4961",
               }}>
-                Welcome back {this.state.isLoaded && this.state.user.name.split(" ")[0]}!
+                Welcome{this.state.isLoaded && ` ${this.state.user.name.split(" ")[0]}`}!
               </Typography>
               <form onSubmit={this.handleSubmit}>
                 <Stack direction="row" mt={1} spacing={2}>
@@ -117,6 +120,11 @@ class Dashboard extends React.Component {
                     }}
                     type="text"
                     name="topic"
+                    sx={{
+                      backgroundColor: "white",
+                      borderRadius: "0.5rem",
+                      border: "1px solid gray",
+                    }}
                   />
                   <Button type="submit" variant="contained">Search</Button>
                 </Stack>
