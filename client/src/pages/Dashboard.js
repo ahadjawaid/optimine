@@ -145,7 +145,7 @@ class Dashboard extends React.Component {
                 return <Stack direction="row" alignItems="center" justifyContent="space-between">
                   <Typography variant="h6" component="a" href={link} width="400px" sx={{
                     textDecoration: "none",
-                  }}>{query.uuid}</Typography>
+                  }}>{query.topic}</Typography>
                   <Typography width="200px">{query.numberOfTweets} Tweets Analyzed</Typography>
                   <Rating variant={variant} />
                 </Stack>;
