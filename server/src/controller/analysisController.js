@@ -1,14 +1,12 @@
 const tf = require("@tensorflow/tfjs-node");
 const word2index = require("../tfjs/tokenizer.json");
 
-
 function getWords(text){
     var words = text.split(" ");
     return words;
 }
 
 function getTokenised(words) {
-    
     var wordTokens = [];
     for (let i = 0; i < words.length; i++) {
         if (word2index[words[i].toLowerCase()] != undefined && wordTokens.length < 50) {
@@ -35,30 +33,24 @@ async function getSentiment(text) {
     return result;
 }
 
-async function getAnalysis(user, rawTweets) {
+async function getAnalysis(user, topic, rawTweets) {
         const tweets = [];
         
         let postiveCount, negativeCount, neutralCount = 0;
-        let tweetData = rawTweets.data;
-        let tweetUsers = rawTweets.users;
-        let tweetMeta = rawTweets.meta;
 
-        for (let i = 0; i < tweetMeta.result_count; i++) {
-            let senti = getSentiment(tweetData[i].text);
-            if(sentiment == 1){
-                postiveCount++;
-            }
-            else{
-                negativeCount++;
-            }
+        for (let i = 0; i < rawTweets.length; i++) {
+            let currTweet = rawTweets[i];
+
+            let sentiment = getSentiment(currTweet.text);
+
             tweets.append({
-                body: tweetData[i].text,
-                poster: tweetUsers[i].username,
-                retweets: tweetData[i].public_metrics.retweet_count,
-                quoteTweets: tweetData[i].public_metrics.quote_count,
-                replies: tweetData[i].public_metrics.reply_count,
-                likes: tweetData[i].public_metrics.like_count,
-                sentiment: senti
+                body: currTweet.text,
+                poster: currTweet.author_id,
+                retweets: currTweet.public_metrics.retweet_count,
+                quoteTweets: currTweet.public_metrics.quote_count,
+                replies: currTweet.public_metrics.reply_count,
+                likes: currTweet.public_metrics.like_count,
+                sentiment: sentiment,
             });
         }
 
@@ -67,12 +59,13 @@ async function getAnalysis(user, rawTweets) {
             postive: postiveCount,
             negative: negativeCount,
             neutral: neutralCount,
-            numberOfTweets: tweetMeta.result_count,
+            numberOfTweets: tweets.length,
             tweets: tweets
         };
 
         return analysis;
 }
 
+//Just pass in a string of text to get the sentiment
 module.exports.getSentiment = getSentiment;
 module.exports.getAnalysis = getAnalysis;
