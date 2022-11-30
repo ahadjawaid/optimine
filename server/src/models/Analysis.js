@@ -5,6 +5,9 @@ const AnalysisSchema = new mongoose.Schema({
     type: String,
     unique: true,
   },
+  topic: {
+    type: String,
+  },
   postive: {
     type: Number,
     default: 0,
