@@ -14,6 +14,18 @@ class AnalysisService {
 
         return response.json();
     }
+
+    static async getUser() {
+        const response = await fetch(`${config.apiURL}/request-analysis`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${AuthService.accessToken}`,
+            },
+        });
+
+        return response.json();
+    }
 }
 
 export default AnalysisService;
