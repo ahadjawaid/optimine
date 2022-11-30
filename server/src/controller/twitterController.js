@@ -16,13 +16,12 @@ async function getTweets(hashtag) {
     });
 
     if (res.data) {
-        return res.data.data;
+        return res;
     } else {
         // throw new Error('Unsuccessful request');
         console.log("request failed");
     }
 }
-
 module.exports.getTweets = getTweets;
 
 
