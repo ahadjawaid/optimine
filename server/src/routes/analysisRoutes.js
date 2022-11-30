@@ -1,5 +1,5 @@
 const { getTweets } = require("../controller/twitterController");
-const { getAnalysis } = require("../controller/analysisController");
+const { getAnalysis, saveAnalysis } = require("../controller/analysisController");
 const { GetUser } = require("../controller/userController");
 
 
@@ -12,9 +12,10 @@ module.exports = (app) => {
         const { user } = await GetUser(authorization);
         const rawTweets = await getTweets(topic);
 
-        const analysis = await getAnalysis(user, topic, rawTweets);
-        console.log(analysis);
+        const analysisData = await getAnalysis(user, topic, rawTweets);
+        
+        await saveAnalysis(analysisData);
 
-        res.status(201).send(analysis);
+        res.status(201).send(analysisData);
     });
 }

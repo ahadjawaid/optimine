@@ -1,5 +1,6 @@
 const tf = require("@tensorflow/tfjs-node");
 const word2index = require("../tfjs/tokenizer.json");
+const { Analysis } = require("../models/Analysis");
 
 async function getAnalysis(user, topic, rawTweets) {
         const tweets = [];
@@ -44,8 +45,20 @@ async function getAnalysis(user, topic, rawTweets) {
         return analysis;
 }
 
+async function saveAnalysis(analysisData) {
+    const analysisObject = new Analysis(analysisData);
+
+    analysisObject.save((error, result) => {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log(result);
+        }
+    });
+}
+
 async function getSentiment(text) {
-    const model = await tf.loadLayersModel("file://src/tfjs/model.json");
+    const model = await tf.loadLayersModel("file://server/src/tfjs/model.json");
     const seedWordToken = tf.tensor2d(getTokenised(getWords(text)));
     const predict = await model.predict(seedWordToken).data();
     const p = predict[0];
@@ -75,3 +88,4 @@ function getWords(text){
 
 //Just pass in a string of text to get the sentiment
 module.exports.getAnalysis = getAnalysis;
+module.exports.saveAnalysis = saveAnalysis;
