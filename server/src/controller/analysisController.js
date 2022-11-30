@@ -1,4 +1,5 @@
 const tf = require("@tensorflow/tfjs-node");
+const mongoose = require("mongoose");
 const word2index = require("../tfjs/tokenizer.json");
 const { Analysis } = require("../models/Analysis");
 
@@ -51,10 +52,14 @@ async function saveAnalysis(analysisData) {
     analysisObject.save((error, result) => {
         if (error) {
             console.log(error);
-        } else {
-            console.log(result);
         }
     });
+}
+
+async function getUserAnalysis(user) {
+    const analysis = Analysis.find({ uuid: user.uuid }).exec();
+
+    return analysis;
 }
 
 async function getSentiment(text) {
@@ -89,3 +94,4 @@ function getWords(text){
 //Just pass in a string of text to get the sentiment
 module.exports.getAnalysis = getAnalysis;
 module.exports.saveAnalysis = saveAnalysis;
+module.exports.getUserAnalysis = getUserAnalysis;

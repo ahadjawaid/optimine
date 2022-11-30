@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const AnalysisSchema = new mongoose.Schema({
   uuid: {
     type: String,
-    unique: true,
   },
   topic: {
     type: String,
