@@ -46,6 +46,7 @@ class Dashboard extends React.Component {
       return;
 
     const savedQueries = await AnalysisService.getUser();
+  
 
     UserService.getUser().then((response) => {
       this.setState({
