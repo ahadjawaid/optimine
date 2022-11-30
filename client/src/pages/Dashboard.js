@@ -31,26 +31,26 @@ const trending = [
   }
 ];
 
-const savedQueries = [
-  {
-    uuid: "974a264f-d3a7-49c0-ad6d-474bfeac5880",
-    positive: 0.4,
-    negative: 0.6,
-    numberOfTweets: 182,
-  },
-  {
-    uuid: "0feea17e-77b3-4b74-b2ff-2e3adc59b7ee",
-    positive: 0.1,
-    negative: 0.9,
-    numberOfTweets: 376,
-  },
-  {
-    uuid: "3094b601-0bb5-400a-9b1c-570e0c06ff43",
-    positive: 0.7,
-    negative: 0.3,
-    numberOfTweets: 73,
-  },
-];
+// const savedQueries = [
+//   {
+//     uuid: "974a264f-d3a7-49c0-ad6d-474bfeac5880",
+//     positive: 0.4,
+//     negative: 0.6,
+//     numberOfTweets: 182,
+//   },
+//   {
+//     uuid: "0feea17e-77b3-4b74-b2ff-2e3adc59b7ee",
+//     positive: 0.1,
+//     negative: 0.9,
+//     numberOfTweets: 376,
+//   },
+//   {
+//     uuid: "3094b601-0bb5-400a-9b1c-570e0c06ff43",
+//     positive: 0.7,
+//     negative: 0.3,
+//     numberOfTweets: 73,
+//   },
+// ];
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -58,17 +58,23 @@ class Dashboard extends React.Component {
     this.state = {
       user: null,
       isLoaded: false,
+      savedQueries: [],
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     if (this.state.isLoaded)
       return;
+
+    const savedQueries = await AnalysisService.getUser();
+    console.log(savedQueries);
+
 
     UserService.getUser().then((response) => {
       this.setState({
         user: response.user,
         isLoaded: true,
+        savedQueries,
       });
     });
   }
@@ -89,13 +95,16 @@ class Dashboard extends React.Component {
       <Navbar />
 
       <Stack direction="column" spacing={4} padding={6}>
-        <Paper sx={paperStyle}>
+        <Paper sx={{
+          ...paperStyle,
+          background: "linear-gradient(180deg, rgba(35, 104, 162, 0.2) 0%, rgba(99, 162, 216, 0.2) 69.27%, rgba(170, 212, 245, 0.2) 100%)",
+        }}>
           <Stack direction="row" justifyContent="space-between" sx={{ paddingLeft: 6, paddingRight: 12 }}>
             <Stack direction="column" width="60%">
               <Typography fontWeight={800} variant="h4" mb={4} mt={3} sx={{
                 color: "#2c4961",
               }}>
-                Welcome back {this.state.isLoaded && this.state.user.name.split(" ")[0]}!
+                Welcome{this.state.isLoaded && ` ${this.state.user.name.split(" ")[0]}`}!
               </Typography>
               <form onSubmit={this.handleSubmit}>
                 <Stack direction="row" mt={1} spacing={2}>
@@ -111,6 +120,11 @@ class Dashboard extends React.Component {
                     }}
                     type="text"
                     name="topic"
+                    sx={{
+                      backgroundColor: "white",
+                      borderRadius: "0.5rem",
+                      border: "1px solid gray",
+                    }}
                   />
                   <Button type="submit" variant="contained">Search</Button>
                 </Stack>
@@ -124,13 +138,13 @@ class Dashboard extends React.Component {
         <Paper sx={paperStyle}>
           <Typography mb={3} variant="h5">Saved Queries</Typography>
 
-          {(savedQueries.length === 0) &&
+          {(this.state.savedQueries.length === 0) &&
             <Typography variant="h6">You don't have any saved queries</Typography>
           }
 
-          {(savedQueries.length > 0) &&
+          {(this.state.savedQueries.length > 0) &&
             <Stack direction="column" ml={3} mr={2} spacing={2}>
-              {savedQueries.map((query) => {
+              {this.state.savedQueries.map((query) => {
                 let variant = (query.positive >= query.negative)
                   ? "positive"
                   : "negative"
@@ -139,7 +153,7 @@ class Dashboard extends React.Component {
                 return <Stack direction="row" alignItems="center" justifyContent="space-between">
                   <Typography variant="h6" component="a" href={link} width="400px" sx={{
                     textDecoration: "none",
-                  }}>{query.uuid}</Typography>
+                  }}>{query.topic}</Typography>
                   <Typography width="200px">{query.numberOfTweets} Tweets Analyzed</Typography>
                   <Rating variant={variant} />
                 </Stack>;

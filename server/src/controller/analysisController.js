@@ -57,7 +57,12 @@ async function saveAnalysis(analysisData) {
 }
 
 async function getUserAnalysis(user) {
-    const analysis = Analysis.find({ uuid: user.uuid }).exec();
+    const cursor = Analysis.find({ uuid: user.uuid }).cursor();
+    const analysis = []
+
+    for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
+        analysis.push(doc);
+    } 
 
     return analysis;
 }
