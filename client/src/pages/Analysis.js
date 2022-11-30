@@ -2,6 +2,7 @@ import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, D
 import { PieChart, Pie, Cell } from "recharts";
 import React from "react";
 import DenyAccess from "../components/DenyAccess";
+import AnalysisService from "../services/AnalysisService";
 import Navbar from "../components/Navbar";
 import Rating from "../components/Rating";
 
@@ -90,6 +91,12 @@ class Analysis extends React.Component {
   componentDidMount() {
     const query = new URLSearchParams(window.location.search);
     const uuid = query.get("uuid");
+
+    // data.positive /= data.numberOfTweets;
+    // data.negative /= data.numberOfTweets;
+    // data.neutral /= data.numberOfTweets;
+
+    // data.sentiment = (data.sentiment > 0.5) ? 1 : 0;
 
     if (Boolean(uuid)) {
       this.setState({

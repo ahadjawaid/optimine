@@ -31,26 +31,26 @@ const trending = [
   }
 ];
 
-const savedQueries = [
-  {
-    uuid: "974a264f-d3a7-49c0-ad6d-474bfeac5880",
-    positive: 0.4,
-    negative: 0.6,
-    numberOfTweets: 182,
-  },
-  {
-    uuid: "0feea17e-77b3-4b74-b2ff-2e3adc59b7ee",
-    positive: 0.1,
-    negative: 0.9,
-    numberOfTweets: 376,
-  },
-  {
-    uuid: "3094b601-0bb5-400a-9b1c-570e0c06ff43",
-    positive: 0.7,
-    negative: 0.3,
-    numberOfTweets: 73,
-  },
-];
+// const savedQueries = [
+//   {
+//     uuid: "974a264f-d3a7-49c0-ad6d-474bfeac5880",
+//     positive: 0.4,
+//     negative: 0.6,
+//     numberOfTweets: 182,
+//   },
+//   {
+//     uuid: "0feea17e-77b3-4b74-b2ff-2e3adc59b7ee",
+//     positive: 0.1,
+//     negative: 0.9,
+//     numberOfTweets: 376,
+//   },
+//   {
+//     uuid: "3094b601-0bb5-400a-9b1c-570e0c06ff43",
+//     positive: 0.7,
+//     negative: 0.3,
+//     numberOfTweets: 73,
+//   },
+// ];
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -58,17 +58,23 @@ class Dashboard extends React.Component {
     this.state = {
       user: null,
       isLoaded: false,
+      savedQueries: [],
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     if (this.state.isLoaded)
       return;
+
+    const savedQueries = await AnalysisService.getUser();
+    console.log(savedQueries);
+  
 
     UserService.getUser().then((response) => {
       this.setState({
         user: response.user,
         isLoaded: true,
+        savedQueries,
       });
     });
   }
@@ -124,13 +130,13 @@ class Dashboard extends React.Component {
         <Paper sx={paperStyle}>
           <Typography mb={3} variant="h5">Saved Queries</Typography>
 
-          {(savedQueries.length === 0) &&
+          {(this.state.savedQueries.length === 0) &&
             <Typography variant="h6">You don't have any saved queries</Typography>
           }
 
-          {(savedQueries.length > 0) &&
+          {(this.state.savedQueries.length > 0) &&
             <Stack direction="column" ml={3} mr={2} spacing={2}>
-              {savedQueries.map((query) => {
+              {this.state.savedQueries.map((query) => {
                 let variant = (query.positive >= query.negative)
                   ? "positive"
                   : "negative"
