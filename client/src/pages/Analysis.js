@@ -96,6 +96,7 @@ class Analysis extends React.Component {
     const savedQueries = await AnalysisService.getUser();
 
     const data = savedQueries[key];
+    console.log(data);
 
 
     data.positive = data.postive / data.numberOfTweets;
@@ -192,7 +193,7 @@ class Analysis extends React.Component {
             <Box>
               <Stack direction="column" spacing={2}>
                 {this.state.data.tweets.map((tweet, index) => {
-                  let variant = (tweet.sentiment === 0)
+                  let variant = (tweet.sentiment < 0.5)
                     ? "negative"
                     : "positive"
 
