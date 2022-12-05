@@ -21,7 +21,7 @@ Navigate to the `optimine/server` directory, execute `npm install`, and start a 
 cd server
 npm install
 cd ../
-node .server/src/server.js
+node ./server/src/server.js
 ```
 
 ### Front End
