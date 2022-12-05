@@ -2,7 +2,9 @@
 
 ## Running the Final Product
 
-To run this project on your local machine, first ensure you have `node.js` and `npm` installed. [Here is a tutorial](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
+To run this project on your local machine, make sure you install the following dependencies:
+- [`node.js` and `npm`](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+- [`python`](https://phoenixnap.com/kb/how-to-install-python-3-windows)
 
 Then, you will need to download the `dev.js` configuration file which contains secret API keys and copy it into the `optimine/server/src/config` directory.
 

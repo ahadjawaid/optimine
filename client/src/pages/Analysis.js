@@ -17,47 +17,6 @@ const colors = {
   Negative: "#EA6067",
 }
 
-// const data = {
-//   uuid: "974a264f-d3a7-49c0-ad6d-474bfeac5880",
-//   positive: 0.4,
-//   negative: 0.6,
-//   numberOfTweets: 182,
-//   tweets: [
-//     {
-//       body: "This product was absolutely amazing and blew my mind away! I would recomment it to anyone who would enjoy it.",
-//       sentiment: 1, // positive
-//     },
-//     {
-//       body: "I will never be buying this product again. It has ruined my life!",
-//       sentiment: 0, // negative
-//     },
-//     {
-//       body: "I am very proud of my family for buying me this product as a birthday gift!",
-//       sentiment: 1,
-//     },
-//     {
-//       body: "Wonderful product. I will be a lifelong customer.",
-//       sentiment: 1,
-//     },
-//     {
-//       body: "Customer service was aweful. I asked for a refund after a year, and they said it’d been too long! Ridiculous!",
-//       sentiment: 0,
-//     },
-//     {
-//       body: "I bought this because it looked nice and fit in with the style of my house.",
-//       sentiment: 1,
-//     },
-//     {
-//       body: "I thought this product would solve all the worlds issues, but it didn’t. How unfortunate.",
-//       sentiment: 0,
-//     },
-//     {
-//       body: "If you care about yourself, don’t buy this product. It is aweful!",
-//       sentiment: 0,
-//     },
-//   ],
-// };
-
 class Analysis extends React.Component {
   constructor(props) {
     super(props);
@@ -177,12 +136,12 @@ class Analysis extends React.Component {
                   <Typography textAlign="center" variant="h6">POSITIVE RESPONSE</Typography>
                   <Typography textAlign="center" variant="h3" sx={{
                     color: colors.Positive
-                  }}>{this.state.data.positive * 100}%</Typography>
+                  }}>{Math.round(this.state.data.positive * 1000) / 10}%</Typography>
                   <Box height="16px" />
                   <Typography textAlign="center" variant="h6">NEGATIVE RESPONSE</Typography>
                   <Typography textAlign="center" variant="h3" sx={{
                     color: colors.Negative
-                  }}>{this.state.data.negative * 100}%</Typography>
+                  }}>{Math.round(this.state.data.negative * 1000) / 10}%</Typography>
                   <Box height="50px" />
                 </Stack>
               </Stack>

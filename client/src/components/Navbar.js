@@ -8,8 +8,8 @@ import AuthService from "../services/AuthService";
 import Logo from "./Logo";
 
 const defaultPages = [
-  { text: "Product", link: "#product" },
-  { text: "Pricing", link: "#pricing" },
+  { text: "Product", link: "/#product" },
+  { text: "Pricing", link: "/#pricing" },
 ];
 
 const userPages = [
