@@ -3,8 +3,8 @@
 ## Running the Final Product
 
 To run this project on your local machine, make sure you install the following dependencies:
-- [`node.js` and `npm`](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
-- [`python`](https://phoenixnap.com/kb/how-to-install-python-3-windows)
+- [node.js and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+- [python](https://phoenixnap.com/kb/how-to-install-python-3-windows)
 
 Then, you will need to download the `dev.js` configuration file which contains secret API keys and copy it into the `optimine/server/src/config` directory.
 
@@ -20,7 +20,8 @@ Navigate to the `optimine/server` directory, execute `npm install`, and start a 
 ```shell
 cd server
 npm install
-node ./src/server.js
+cd ../
+node .server/src/server.js
 ```
 
 ### Front End
